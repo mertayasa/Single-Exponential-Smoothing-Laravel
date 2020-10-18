@@ -17,7 +17,6 @@ class UserSeeder extends Seeder
                 'name' => 'admin',
                 'email' => 'admin@demo.com',
                 'password' => bcrypt('asdasd'),
-                'user_role_id' => '1',
                 'created_at' => \Carbon\Carbon::now(),
             ),
         ));
