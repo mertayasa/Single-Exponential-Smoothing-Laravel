@@ -18,18 +18,6 @@ class WebhookController extends Controller
 
         $user_profile = $bot->getProfile($user_id);
 
-        
-
-        // $profile_name = json_decode($user_profile, true);
-
-        // {
-        //     "userId":"Ue653f7ce114b2f4adfaa7abe53e1fc3e",
-        //     "displayName":"Bali Merta",
-        //     "pictureUrl":"https://sprofile.line-scdn.net/0hV9xDOjYrCRZVPSFIb5h3aSVtCnx2TFAEfF5BIjM_VnJvDRwTLV8Uc2k0AnQ9CBpCK1tFJDc7A3RZLn5wS2v1IlINVyFsCU9EfF9H-Q",
-        //     "statusMessage":"Persija 1928",
-        //     "language":"en"
-        // }
-
         $profile_model = new UserProfile;
         $profile_model->profile_json = $user_profile['displayName'];
         $profile_model->save();
@@ -39,7 +27,7 @@ class WebhookController extends Controller
 
         if($chat=='hai' || $chat=='halo' || $chat=='hello' || $chat=='hi') {
             // $balas='hai'.' '.$profile_name['displayName'];
-            $balas='hai';
+            $balas='hai'.' '. $user_profile['displayName'];
             $bot->reply($balas);
         } else if($chat=='siapa nama mu ?') {
             $balas='nama ku CybertechBot chat bot Line dengan PHP';
