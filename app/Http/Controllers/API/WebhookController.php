@@ -22,11 +22,13 @@ class WebhookController extends Controller
         $profile_model->profile_json = $user_profile;
         $profile_model->save();
 
+        $profile_name = json_decode($user_profile);
+
         //mengubah chat userke huruf kecil
         $chat=strtolower($text);
 
         if($chat=='hai' || $chat=='halo' || $chat=='hello' || $chat=='hi') {
-            $balas='hai'.' '.$user_profile['displayName'];
+            $balas='hai'.' '.$profile_name['displayName'];
             $bot->reply($balas);
         } else if($chat=='siapa nama mu ?') {
             $balas='nama ku CybertechBot chat bot Line dengan PHP';
