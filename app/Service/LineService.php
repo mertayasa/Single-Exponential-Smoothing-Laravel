@@ -34,7 +34,28 @@ class LineService{
 		$result = curl_exec($ch); 
 		curl_close($ch); 
 		return $result;
-    }
+	}
+
+	public function httpGet($api){
+		$ch = curl_init($api); 
+		curl_setopt($ch, CURLOPT_POST, true); 
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET'); 
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array( 
+		'Content-Type: application/json; charser=UTF-8', 
+		'Authorization: Bearer '.$this->channelAccessToken)); 
+		$result = curl_exec($ch); 
+		curl_close($ch); 
+		return $result;
+	}
+
+	
+	public function getProfile($user_id){
+		$api = "https://api.line.me/v2/bot/profile/".$user_id;
+		$result = $this->httpGet($api);
+
+		return $result;
+	}
     
 
 	public function reply($text){

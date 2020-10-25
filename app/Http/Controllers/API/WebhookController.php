@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Service\LineService;
 use Illuminate\Http\Request;
+use App\Models\UserProfile;
 
 class WebhookController extends Controller
 {
@@ -12,6 +13,14 @@ class WebhookController extends Controller
         $bot = new LineService();
         //ambil chat user
         $text = $bot->getMessageText();
+
+        $user_id = $bot->getUserId();
+
+        $user_profile = $bot->getProfile($user_id);
+
+        $profile_model = new UserProfile;
+        $profile_model->profile_json = $user_profile;
+        $profile_model->save();
 
         //mengubah chat userke huruf kecil
         $chat=strtolower($text);
