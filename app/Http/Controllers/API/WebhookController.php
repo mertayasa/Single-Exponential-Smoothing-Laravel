@@ -26,7 +26,7 @@ class WebhookController extends Controller
         $chat=strtolower($text);
 
         if($chat=='hai' || $chat=='halo' || $chat=='hello' || $chat=='hi') {
-            $balas='hai';
+            $balas='hai'.' '.$user_profile['displayName'];
             $bot->reply($balas);
         } else if($chat=='siapa nama mu ?') {
             $balas='nama ku CybertechBot chat bot Line dengan PHP';
