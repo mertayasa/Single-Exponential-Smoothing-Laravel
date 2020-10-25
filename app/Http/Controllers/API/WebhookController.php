@@ -18,11 +18,11 @@ class WebhookController extends Controller
 
         $user_profile = $bot->getProfile($user_id);
 
-        $profile_model = new UserProfile;
-        $profile_model->profile_json = $user_profile;
-        $profile_model->save();
-
         $profile_name = json_decode($user_profile);
+
+        $profile_model = new UserProfile;
+        $profile_model->profile_json = $profile_name;
+        $profile_model->save();
 
         //mengubah chat userke huruf kecil
         $chat=strtolower($text);
