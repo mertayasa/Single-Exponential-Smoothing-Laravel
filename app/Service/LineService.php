@@ -46,7 +46,8 @@ class LineService{
 		'Authorization: Bearer '.$this->channelAccessToken)); 
 		$result = curl_exec($ch); 
 		curl_close($ch); 
-		return $result;
+		$test = json_decode($this->body, true);
+		return $test;
 	}
 
 	
