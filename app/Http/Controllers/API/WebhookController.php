@@ -18,6 +18,8 @@ class WebhookController extends Controller
 
         $user_profile = $bot->getProfile($user_id);
 
+        
+
         // $profile_name = json_decode($user_profile, true);
 
         // {
@@ -29,7 +31,7 @@ class WebhookController extends Controller
         // }
 
         $profile_model = new UserProfile;
-        $profile_model->profile_json = $user_profile;
+        $profile_model->profile_json = $user_profile['displayName'];
         $profile_model->save();
 
         //mengubah chat userke huruf kecil
