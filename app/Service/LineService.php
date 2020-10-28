@@ -261,7 +261,9 @@ class LineService{
 			    	'text' => $text,
 			    	'actions' => [ 
 			    		array(
-			    			'type' => 'message',
+							'type' => 'postback',
+							// "label": "Buy",
+							"data" => "action=buy&itemid=123",
 			    			'label' => ucfirst($aksi1),
 			    			'text' => $aksi1
 			    		), 
