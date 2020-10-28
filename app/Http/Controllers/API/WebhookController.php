@@ -18,7 +18,7 @@ class WebhookController extends Controller
 
         $user_profile = $bot->getProfile($user_id);
 
-        $postback = $bot->postbackEvent();
+        // $postback = $bot->postbackEvent();
 
         // $profile_model = new UserProfile;
         // // $profile_model->profile_json = $user_profile['displayName'];
