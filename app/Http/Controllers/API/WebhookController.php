@@ -12,11 +12,12 @@ class WebhookController extends Controller
     public function handle(Request $request){
         $bot = new LineService();
         //ambil chat user
-        $text = $bot->getMessageText();
+        $text = 'hai';
+        // $text = $bot->getMessageText();
 
-        $user_id = $bot->getUserId();
+        // $user_id = $bot->getUserId();
 
-        $user_profile = $bot->getProfile($user_id);
+        // $user_profile = $bot->getProfile($user_id);
 
         $postback = $bot->postbackEvent();
 
@@ -30,7 +31,8 @@ class WebhookController extends Controller
 
         if($chat=='hai' || $chat=='halo' || $chat=='hello' || $chat=='hi') {
             // $balas='hai'.' '.$profile_name['displayName'];
-            $balas='hai'.' '. $user_profile['displayName'];
+            // $balas='hai'.' '. $user_profile['displayName'];
+            $balas='hai';
             $bot->reply($balas);
         } else if($chat=='siapa nama mu ?') {
             $balas='nama ku CybertechBot chat bot Line dengan PHP';
