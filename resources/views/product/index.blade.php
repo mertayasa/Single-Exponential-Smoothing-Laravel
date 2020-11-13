@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 
 @push('styles')
-    {{-- <link rel="stylesheet" href="{{asset('admin/vendor/datatables_jquery/datatables.css')}}"> --}}
+    <link rel="stylesheet" href="{{asset('admin/vendor/datatables_jquery/datatables.css')}}">
     <link rel="stylesheet" href="{{asset('plugin/sweetalert2/dist/sweetalert2.css')}}">
-    {{-- <link rel="stylesheet" href="{{asset('plugin/iCheck/flat/orange.css')}}"> --}}
+    <link rel="stylesheet" href="{{asset('plugin/iCheck/skins/flat/orange.css')}}">
 @endpush
 @section('content')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -27,7 +27,7 @@
                         </div>
                     </div>
                 </div>
-                {{-- {!! $dataTable->table(['width' => '100%']) !!} --}}
+                {!! $dataTable->table(['width' => '100%']) !!}
             </div>
         </div>
     </div>
@@ -61,7 +61,7 @@
 @endsection
 
 @push('scripts')
-{{-- <script src="{{asset('admin/vendor/datatables_jquery/datatables.js')}}"></script> --}}
+<script src="{{asset('admin/vendor/datatables_jquery/datatables.js')}}"></script>
 <script src="{{asset('plugin/sweetalert2/dist/sweetalert2.js')}}"></script>
 <script src="{{asset('plugin/iCheck/icheck.js')}}"></script>
 @include('layouts.admin_js')
@@ -81,7 +81,7 @@
 
     let productIdField = $('#productId');
     let productNameField = $('#productName');
-    let productSelect = $('#productCategory');
+    let categorySelect = $('#productCategory');
     let buttonSubmit = $('.btn-submit');
 
     // Show create modal and fill it with data
@@ -106,7 +106,7 @@
             method = 'patch';
             urlMethod = "{{ url('product_update')}}" + '/' + productIdField.val();
         }
-        // let urlMethod = url == 'create' ? "{{ url('subdivision_group/store')}}" : "{{ url('subdivision_group_update')}}" + '/' + propertyIdField.val()
+
         $.ajax({
             headers: {'X-CSRF-TOKEN': csrf_token},
             url : urlMethod,
@@ -128,8 +128,8 @@
                             text: data[1]
                         })
                     }
-                // let table = $('#'+tableId).DataTable()
-                // table.draw()
+                let table = $('#'+tableId).DataTable()
+                table.draw()
             }
         })
     }
@@ -141,20 +141,20 @@
         let csrf_token = "{{csrf_token()}}"
 
         $.ajax({
-            url : "{{url('category')}}" + '/' + id,
+            url : "{{url('product')}}" + '/' + id,
             method : 'get',
             dataType : 'json',
             headers: {'X-CSRF-TOKEN': csrf_token},
             success: function(data){
                 console.log(data)
-                categoryIdField.val(data.id);
-                categoryNameField.val(data.category_name);
-                categorySelect.val(data.type)
+                productIdField.val(data.id);
+                productNameField.val(data.product_name);
+                categorySelect.val(data.product_category_id)
             }
 
         })
     }
 
 </script>
-{{-- {!! $dataTable->scripts() !!} --}}
+{!! $dataTable->scripts() !!}
 @endpush

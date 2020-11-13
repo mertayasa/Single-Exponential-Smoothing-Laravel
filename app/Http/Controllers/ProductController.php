@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ProductDataTable;
 use App\Product;
 use App\Repositories\ProductCategoryRepository;
 use App\Repositories\ProductRepository;
@@ -19,12 +20,11 @@ class ProductController extends Controller
         $this->productCategoryRepository = $productCategoryRepo;
     }
 
-    public function index()
+    public function index(ProductDataTable $productDataTable)
     {
         $category = $this->productCategoryRepository->getAllData()->pluck('category_name', 'id');
         $category->prepend('Select Category');
-        // dd($category);
-        return view('product.index', compact('category'));
+        return $productDataTable->render('product.index', compact('category'));
     }
 
     /**
@@ -75,9 +75,18 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        try{
+            $product = $this->productRepository->findById($id);
+            if($product){
+                return $product;
+            }else{
+                return 'Product Not Found';
+            }
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -87,9 +96,19 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        try{
+            $this->productRepository->update($data, $id);
+        }catch(Exception $e){
+            return array(0, '500 Internal Server Error | Unable To Save Data');
+            // return array(0, $e->getMessage());
+        }
+
+        return array(1, 'Category updated successfully');
+
     }
 
     /**
@@ -98,8 +117,32 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Request $request, $id)
     {
-        //
+        $data_id = $request->all();
+
+        if(isset($data_id['model_id'])){
+            try{
+                foreach($data_id['model_id'] as $data_id){
+                    $product = $this->productRepository->findById($data_id);
+                    if (empty($product)) {
+                        return array(0, 'Product not found');
+                    }
+                    $product->delete();
+                }
+            }catch(Exception $e){
+                return array(0, '500 Internal Server Error | Cannot Delete Product');
+            }
+            
+            return array(1, 'Product delete successfully');
+        }else{
+            $product = $this->productRepository->findById($id);
+            if($product){
+                $product->delete();
+            }else{
+                return array(0, 'Product not found');
+            };
+            return array(1, 'Product delete successfully');
+        }
     }
 }
