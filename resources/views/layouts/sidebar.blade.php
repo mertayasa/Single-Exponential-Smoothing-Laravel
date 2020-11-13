@@ -18,8 +18,14 @@
 
 <li class="nav-item {{Request::is('product*') ? 'active' : ''}}">
 <a class="nav-link" href="{{route('product.index')}}">
-    <i class="fas fa-fw fa-tachometer-alt"></i>
-    <span>Product</span></a>
+    <i class="fas fa-shopping-bag"></i>
+    <span>Produk</span></a>
+</li>
+
+<li class="nav-item {{Request::is('product_category*') ? 'active' : ''}}">
+<a class="nav-link" href="{{route('product_category.index')}}">
+    <i class="fas fa-layer-group"></i>
+    <span>Kategori</span></a>
 </li>
 
 <!-- Divider -->
@@ -32,15 +38,15 @@
 
 <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
-<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-    <i class="fas fa-fw fa-cog"></i>
-    <span>Components</span>
+<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForecast" aria-expanded="true" aria-controls="collapseForecast">
+    <i class="fas fa-chart-bar"></i>
+    <span>Peramalan</span>
 </a>
-<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+<div id="collapseForecast" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
-    <h6 class="collapse-header">Custom Components:</h6>
-    <a class="collapse-item" href="buttons.html">Buttons</a>
-    <a class="collapse-item" href="cards.html">Cards</a>
+    <h6 class="collapse-header">Manajemen Peramalan:</h6>
+    <a class="collapse-item" href="buttons.html">Data Aktual</a>
+    <a class="collapse-item" href="cards.html">Peramalan</a>
     </div>
 </div>
 </li>

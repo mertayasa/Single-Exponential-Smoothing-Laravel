@@ -1,0 +1,1 @@
+{!! Form::checkbox('delete_id', $product_category['id'], null, ['class' => 'checkbox_id checkbox'])!!}

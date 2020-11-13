@@ -2,14 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\Product;
+use App\Models\ProductCategory;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class ProductDataTable extends DataTable
+class CategoryDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,19 +21,19 @@ class ProductDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->editColumn('selection', function($product){
-                return view('product.datatables_check', compact('product'));
+            ->editColumn('selection', function($product_category){
+                return view('product_category.datatables_check', compact('product_category'));
             })
-            ->addColumn('action', 'product.datatables_action');
+            ->addColumn('action', 'product_category.datatables_action');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\ProductDataTable $model
+     * @param \App\Models\CategoryDataTable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Product $model)
+    public function query(ProductCategory $model)
     {
         return $model->newQuery();
     }
@@ -46,9 +46,9 @@ class ProductDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('productdatatable-table')
+                    ->setTableId('categorydatatable-table')
                     ->columns($this->getColumns())
-                    ->addAction(['title' => 'Action', 'width' => '150px', 'printable' => false, 'responsivePriority' => '100', 'id' => 'actionColumn'])
+                    ->addAction(['title' => 'Aksi', 'width' => '150px', 'printable' => false, 'responsivePriority' => '100', 'id' => 'actionColumn'])
                     ->minifiedAjax()
                     ->orderBy(1);
     }
@@ -76,13 +76,9 @@ class ProductDataTable extends DataTable
                 'visible' => false
             ],
             [
-                'data' => 'product_name',
-                'title' => 'Nama Product'
-            ],
-            [
-                'data' => 'product_category.category_name',
-                'title' => 'Kategori Produk'
-            ],
+                'data' => 'category_name',
+                'title' => 'Nama Kategori'
+            ]
         ];
 
         return $columns;
@@ -95,6 +91,6 @@ class ProductDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Product_' . date('YmdHis');
+        return 'Category_' . date('YmdHis');
     }
 }
