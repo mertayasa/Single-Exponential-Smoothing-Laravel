@@ -45,7 +45,7 @@
 <div id="collapseForecast" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
     <h6 class="collapse-header">Manajemen Peramalan:</h6>
-    <a class="collapse-item" href="buttons.html">Data Aktual</a>
+    <a class="collapse-item" href="{{route('actual_data.index')}}">Data Aktual</a>
     <a class="collapse-item" href="cards.html">Peramalan</a>
     </div>
 </div>
