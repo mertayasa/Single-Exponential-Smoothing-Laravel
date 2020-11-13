@@ -1,220 +1,263 @@
 <p align="center">
-  <a href="http://sweetalert.js.org">
-    <img alt="SweetAlert" src="https://raw.githubusercontent.com/t4t5/sweetalert/e3c2085473a0eb5a6b022e43eb22e746380bb955/assets/logotype.png" width="300">
+  <a href="https://github.com/sponsors/limonte">[= Become the :trophy: Ultimate Sponsor of SweetAlert2 and place your banner here (100K+ unique visitors per month) =]</a>
+</p>
+
+<p align="center">
+  <a href="https://sweetalert2.github.io/">
+    <img src="/assets/swal2-logo.png" alt="SweetAlert2">
   </a>
 </p>
 
 <p align="center">
-  A beautiful replacement for JavaScript's "alert"
+  A beautiful, responsive, customizable, accessible (WAI-ARIA) replacement for JavaScript's popup boxes. Zero dependencies.
 </p>
 
 <p align="center">
-  <a href="https://badge.fury.io/js/sweetalert"><img src="https://badge.fury.io/js/sweetalert.svg" alt="npm version" height="18"></a>
-  <a href="https://travis-ci.org/t4t5/sweetalert"><img src="https://travis-ci.org/t4t5/sweetalert.svg" alt="Build status" /></a>
-  <a href="https://www.npmjs.com/package/sweetalert">
-    <img src="https://img.shields.io/npm/dm/sweetalert.svg" />
+  <a href="https://sweetalert2.github.io/">
+    <img src="https://raw.github.com/sweetalert2/sweetalert2/master/assets/sweetalert2.gif" width="562"><br>
+    See SweetAlert2 in action ↗
   </a>
-  <a href="https://github.com/t4t5/sweetalert/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/t4t5/sweetalert.svg" />
-  </a> 
-  <a href="#backers" alt="sponsors on Open Collective"><img src="https://opencollective.com/SweetAlert/backers/badge.svg" /></a> <a href="#sponsors" alt="Sponsors on Open Collective"><img src="https://opencollective.com/SweetAlert/sponsors/badge.svg" /></a>
 </p>
 
 <p align="center">
-  <img alt="A success modal" src="https://raw.githubusercontent.com/t4t5/sweetalert/e3c2085473a0eb5a6b022e43eb22e746380bb955/assets/swal.gif">
+  <a href="https://github.com/sweetalert2/sweetalert2/actions"><img alt="Build Status" src="https://github.com/sweetalert2/sweetalert2/workflows/build/badge.svg"></a>
+  <a href="https://codeclimate.com/github/sweetalert2/sweetalert2/test_coverage"><img alt="Coverage Status" src="https://api.codeclimate.com/v1/badges/eba34bb80477933854d4/test_coverage"></a>
+  <a href="https://www.npmjs.com/package/sweetalert2"><img alt="Version" src="https://img.shields.io/npm/v/sweetalert2.svg"></a>
+  <a href="https://www.jsdelivr.com/package/npm/sweetalert2"><img alt="jsdelivr" src="https://data.jsdelivr.com/v1/package/npm/sweetalert2/badge?style=rounded"></a>
+  <a href="#support-and-donations"><img alt="Support Donate" src="https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=ea4aaa"></a>
 </p>
 
+---
 
-## Installation
+:shipit: The author of SweetAlert2 ([@limonte](https://github.com/limonte/)) is looking for short-term to medium-term working contracts in front-end, preferably OSS.
 
-```bash
-$ npm install --save sweetalert
+---
+
+:point_right: **Upgrading from v9.x to v10.x?** [Read the release notes!](https://github.com/sweetalert2/sweetalert2/releases/tag/v10.0.0)
+<br>If you're upgrading from v8.x, please [upgrade from v8 to v9](https://github.com/sweetalert2/sweetalert2/releases/tag/v10.0.0) first!
+<br>If you're upgrading from v7.x, please [upgrade from v7 to v8](https://github.com/sweetalert2/sweetalert2/releases/tag/v8.0.0) first!
+<br>If you're upgrading from v6.x, please [upgrade from v6 to v7](https://github.com/sweetalert2/sweetalert2/releases/tag/v7.0.0) first!
+
+:point_right: **Migrating from [SweetAlert](https://github.com/t4t5/sweetalert)?** [SweetAlert 1.x to SweetAlert2 migration guide](https://github.com/sweetalert2/sweetalert2/wiki/Migration-from-SweetAlert-to-SweetAlert2)
+
+---
+
+Installation
+------------
+
+```sh
+npm install --save sweetalert2
 ```
 
-## Usage
+Or grab from [jsdelivr CDN](https://www.jsdelivr.com/package/npm/sweetalert2)
+:
 
-```javascript
-import swal from 'sweetalert';
-
-swal("Hello world!");
+```html
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 ```
 
-## Upgrading from 1.X
 
-Many improvements and breaking changes have been introduced in the 2.0 release. Make sure you read the [upgrade guide](https://sweetalert.js.org/guides/#upgrading-from-1x) to avoid nasty suprises!
+Usage
+-----
 
-## Guides
+```html
+<script src="sweetalert2/dist/sweetalert2.all.min.js"></script>
 
-- [Installation](https://sweetalert.js.org/guides/#installation)
-- [Getting started](https://sweetalert.js.org/guides/#getting-started)
-- [Advanced examples](https://sweetalert.js.org/guides/#advanced-examples)
-- [Using with libraries](https://sweetalert.js.org/guides/#using-with-libraries)
-- [Upgrading from 1.X](https://sweetalert.js.org/guides/#upgrading-from-1x)
-
-## Documentation
-
-- [Configuration](https://sweetalert.js.org/docs/#configuration)
-- [Methods](https://sweetalert.js.org/docs/#methods)
-- [Theming](https://sweetalert.js.org/docs/#theming)
-
-## Examples
-
-### An error message:
-```javascript
-swal("Oops!", "Something went wrong!", "error");
+<!-- Include a polyfill for ES6 Promises (optional) for IE11 -->
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
 ```
 
-### A warning message, with a function attached to the confirm message:
-  - Using promises:
-  ```javascript
-  swal({
-    title: "Are you sure?",
-    text: "Are you sure that you want to leave this page?",
-    icon: "warning",
-    dangerMode: true,
-  })
-  .then(willDelete => {
-    if (willDelete) {
-      swal("Deleted!", "Your imaginary file has been deleted!", "success");
-    }
-  });
-  ```
-  - Using async/await:
-  ```javascript
-  const willDelete = await swal({
-    title: "Are you sure?",
-    text: "Are you sure that you want to delete this file?",
-    icon: "warning",
-    dangerMode: true,
-  });
+You can also include the stylesheet separately if desired:
 
-  if (willDelete) {
-    swal("Deleted!", "Your imaginary file has been deleted!", "success");
+```html
+<script src="sweetalert2/dist/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2/dist/sweetalert2.min.css">
+```
+
+Or:
+
+```js
+// ES6 Modules or TypeScript
+import Swal from 'sweetalert2'
+
+// CommonJS
+const Swal = require('sweetalert2')
+```
+
+Or with JS modules:
+
+```html
+<link rel="stylesheet" href="sweetalert2/dist/sweetalert2.css">
+
+<script type="module">
+  import Swal from 'sweetalert2/src/sweetalert2.js'
+</script>
+```
+
+It's possible to import JS and CSS separately, e.g. if you need to customize styles:
+
+```js
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+
+import 'sweetalert2/src/sweetalert2.scss'
+```
+
+Please note that [TypeScript is well-supported](https://github.com/sweetalert2/sweetalert2/blob/master/sweetalert2.d.ts), so you don't have to install a third-party declaration file.
+
+
+Examples
+--------
+
+The most basic message:
+
+```js
+Swal.fire('Hello world!')
+```
+
+A message signaling an error:
+
+```js
+Swal.fire('Oops...', 'Something went wrong!', 'error')
+```
+
+Handling the result of SweetAlert2 modal:
+
+```js
+Swal.fire({
+  title: 'Are you sure?',
+  text: 'You will not be able to recover this imaginary file!',
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'Yes, delete it!',
+  cancelButtonText: 'No, keep it'
+}).then((result) => {
+  if (result.value) {
+    Swal.fire(
+      'Deleted!',
+      'Your imaginary file has been deleted.',
+      'success'
+    )
+  // For more information about handling dismissals please visit
+  // https://sweetalert2.github.io/#handling-dismissals
+  } else if (result.dismiss === Swal.DismissReason.cancel) {
+    Swal.fire(
+      'Cancelled',
+      'Your imaginary file is safe :)',
+      'error'
+    )
   }
-  ```
-  
-### A prompt modal, where the user's input is logged:
-  - Using promises:
-  ```javascript
-  swal("Type something:", {
-    content: "input",
-  })
-  .then((value) => {
-    swal(`You typed: ${value}`);
-  });
-  ```
-  - Using async/await:
-  ```javascript
-  const value = await swal("Type something:", {
-    content: "input",
-  });
-
-  swal(`You typed: ${value}`);
-  ```
-
-### In combination with Fetch:
-  - Using promises:
-  ```javascript
-  swal({
-    text: "Wanna log some information about Bulbasaur?",
-    button: {
-      text: "Search!",
-      closeModal: false,
-    },
-  })
-  .then(willSearch => {
-    if (willSearch) {
-      return fetch("http://pokeapi.co/api/v2/pokemon/1");
-    }
-  })
-  .then(result => result.json())
-  .then(json => console.log(json))
-  .catch(err => {
-    swal("Oops!", "Seems like we couldn't fetch the info", "error");
-  });
-  ```
-  - Using async/await:
-  ```javascript
-  const willSearch = await swal({
-    text: "Wanna log some information about Bulbasaur?",
-    button: {
-      text: "Search!",
-      closeModal: false,
-    },
-  });
-  
-  if (willSearch) {
-    try {
-      const result = await fetch("http://pokeapi.co/api/v2/pokemon/1");
-      const json = await result.json();
-      console.log(json);
-    } catch (err) {
-      swal("Oops!", "Seems like we couldn't fetch the info", "error");
-    }
-  }
-  ```
-
-## Using with React
-
-SweetAlert has tools for [integrating with your favourite rendering library](https://sweetalert.js.org/guides/#using-with-libraries).
-
-If you're using React, you can install [SweetAlert with React](https://www.npmjs.com/package/@sweetalert/with-react) in addition to the main library, and easily add React components to your alerts like this:
-
-```javascript
-import React from 'react'
-import swal from '@sweetalert/with-react'
-
-swal(
-  <div>
-    <h1>Hello world!</h1>
-    <p>
-      This is now rendered with JSX!
-    </p>
-  </div>
-)
+})
 ```
 
-[Read more about integrating with React](http://localhost:3000/guides#using-react)
-
-## Contributing
-
-### If you're changing the core library:
-1. Make changes in the `src` folder.
-2. Preview changes by running `npm run docs`
-3. Submit pull request
-
-### If you're changing the documentation:
-1. Make changes in the `docs-src` folder.
-2. Preview changes by running `npm run docs`
-3. Run `npm run builddocs` to compile the changes to the `docs` folder
-4. Submit pull request
-
-## Contributors
-
-This project exists thanks to all the people who contribute. [[Contribute](https://github.com/t4t5/sweetalert#contributing)].
-<a href="https://github.com/t4t5/sweetalert/graphs/contributors"><img src="https://opencollective.com/SweetAlert/contributors.svg?width=890&button=false" /></a>
+## [Go here to see the docs and more examples ↗](https://sweetalert2.github.io/)
 
 
-## Backers
+Browser compatibility
+---------------------
 
-Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/SweetAlert#backer)]
+ IE11* | Edge | Chrome | Firefox | Safari | Opera | UC Browser
+-------|------|--------|---------|--------|-------|------------
+:heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
 
-<a href="https://opencollective.com/SweetAlert#backers" target="_blank"><img src="https://opencollective.com/SweetAlert/backers.svg?width=890"></a>
+\* ES6 Promise polyfill should be included, see [usage example](#usage).
 
-
-## Sponsors
-
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/SweetAlert#sponsor)]
-
-<a href="https://opencollective.com/SweetAlert/sponsor/0/website" target="_blank"><img src="https://opencollective.com/SweetAlert/sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/SweetAlert/sponsor/1/website" target="_blank"><img src="https://opencollective.com/SweetAlert/sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/SweetAlert/sponsor/2/website" target="_blank"><img src="https://opencollective.com/SweetAlert/sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/SweetAlert/sponsor/3/website" target="_blank"><img src="https://opencollective.com/SweetAlert/sponsor/3/avatar.svg"></a>
-<a href="https://opencollective.com/SweetAlert/sponsor/4/website" target="_blank"><img src="https://opencollective.com/SweetAlert/sponsor/4/avatar.svg"></a>
-<a href="https://opencollective.com/SweetAlert/sponsor/5/website" target="_blank"><img src="https://opencollective.com/SweetAlert/sponsor/5/avatar.svg"></a>
-<a href="https://opencollective.com/SweetAlert/sponsor/6/website" target="_blank"><img src="https://opencollective.com/SweetAlert/sponsor/6/avatar.svg"></a>
-<a href="https://opencollective.com/SweetAlert/sponsor/7/website" target="_blank"><img src="https://opencollective.com/SweetAlert/sponsor/7/avatar.svg"></a>
-<a href="https://opencollective.com/SweetAlert/sponsor/8/website" target="_blank"><img src="https://opencollective.com/SweetAlert/sponsor/8/avatar.svg"></a>
-<a href="https://opencollective.com/SweetAlert/sponsor/9/website" target="_blank"><img src="https://opencollective.com/SweetAlert/sponsor/9/avatar.svg"></a>
+Note that SweetAlert2 **does not** and **will not** provide support or functionality of any kind on IE10 and lower.
 
 
+
+Themes ([`sweetalert2-themes ↗`](https://github.com/sweetalert2/sweetalert2-themes))
+------
+
+- [`Dark`](https://github.com/sweetalert2/sweetalert2-themes/tree/master/dark)
+- [`Minimal`](https://github.com/sweetalert2/sweetalert2-themes/tree/master/minimal)
+- [`Borderless`](https://github.com/sweetalert2/sweetalert2-themes/tree/master/borderless)
+- [`Bootstrap 4`](https://github.com/sweetalert2/sweetalert2-themes/tree/master/bootstrap-4)
+- [`Material UI`](https://github.com/sweetalert2/sweetalert2-themes/tree/master/material-ui)
+- [`WordPress Admin`](https://github.com/sweetalert2/sweetalert2-themes/tree/master/wordpress-admin)
+- [`Bulma`](https://github.com/sweetalert2/sweetalert2-themes/tree/master/bulma)
+- [`Default`](https://github.com/sweetalert2/sweetalert2-themes/tree/master/default)
+
+
+Related projects
+-------------------------
+
+- [ngx-sweetalert2](https://github.com/sweetalert2/ngx-sweetalert2) - Angular 4+ integration
+- [sweetalert2-react-content](https://github.com/sweetalert2/sweetalert2-react-content) - React integration
+- [sweetalert2-webpack-demo](https://github.com/sweetalert2/sweetalert2-webpack-demo) - webpack demo
+- [sweetalert2-parcel-demo](https://github.com/sweetalert2/sweetalert2-parcel-demo) - overriding SCSS variables demo
+
+
+Related community projects
+-------------------------
+
+- [avil13/vue-sweetalert2](https://github.com/avil13/vue-sweetalert2) - Vue.js wrapper
+- [realrashid/sweet-alert](https://github.com/realrashid/sweet-alert) - Laravel 5 Package
+- [Basaingeal/Razor.SweetAlert2](https://github.com/Basaingeal/Razor.SweetAlert2) - Blazor Wrapper
+- [ElectronAlert](https://electron.guide/electron-alert/) - SweetAlert2 for Electron applications (main process)
+
+
+Collaborators
+-------------
+
+[![](https://avatars3.githubusercontent.com/u/17089396?v=4&s=80)](https://github.com/gverni) | [![](https://avatars3.githubusercontent.com/u/3198597?v=4&s=80)](https://github.com/zenflow) | [![](https://avatars1.githubusercontent.com/u/1343250?v=4&s=80)](https://github.com/toverux)
+-|-|-
+[@gverni](https://github.com/gverni) | [@zenflow](https://github.com/zenflow) | [@toverux](https://github.com/toverux)
+
+
+Contributing
+------------
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/eba34bb80477933854d4/maintainability)](https://codeclimate.com/github/sweetalert2/sweetalert2/maintainability)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/sweetalert2/sweetalert2/blob/master/CHANGELOG.md)
+
+If you would like to contribute enhancements or fixes, please do the following:
+
+1. Fork the `sweetalert2` repository and clone it locally.
+
+2. Make sure you have [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) installed.
+
+3. When in the SweetAlert2 directory, run `npm install` or `yarn install` to install dependencies.
+
+4. To begin active development, run `npm start` or `yarn start`. This does several things for you:
+ - Builds the `dist` folder
+ - Serves sandbox.html @ http://localhost:8080/ (browser-sync ui:  http://localhost:8081/)
+ - Re-builds and re-loads as necessary when files change
+
+Big Thanks
+----------
+
+- [Serena Verni (@serenaperora)](https://serena.verni.xyz) for creating the amazing project logo
+- [Sauce Labs](https://saucelabs.com/) for providing the reliable cross-browser testing platform
+
+Sponsors
+--------
+
+[<img src="https://sweetalert2.github.io/images/sponsors/flowcrypt-banner.png">](https://flowcrypt.com/?utm_source=sweetalert2&utm_medium=banner)
+
+[<img src="https://sweetalert2.github.io/images/plus.png" width="80">](SPONSORS.md) | [<img src="https://avatars2.githubusercontent.com/u/28631236?s=80&v=4" width="80">](https://flowcrypt.com/?utm_source=sweetalert2&utm_medium=logo) | [<img src="https://sweetalert2.github.io/images/sponsors/brainbi.png" width="80">](https://www.brainbi.dev/) | [<img src="https://avatars0.githubusercontent.com/u/3986989?s=80&v=4" width="80">](https://github.com/tiagostutz)
+-|-|-|-
+[Become a sponsor](SPONSORS.md) | [FlowCrypt](https://flowcrypt.com/?utm_source=sweetalert2&utm_medium=logo) | [brainbi price monitoring](https://www.brainbi.dev/) | [Tiago de Oliveira Stutz](https://github.com/tiagostutz)
+
+[<img src="https://sweetalert2.github.io/images/sponsors/zillathemes.jpg" width="80">](https://zillathemes.com/) | [<img src="https://sweetalert2.github.io/images/sponsors/sebaebc.png" width="80">](https://github.com/sebaebc) | [<img src="https://sweetalert2.github.io/images/sponsors/wp-reset.png" width="80">](https://wpreset.com/?utm_source=sweetalert2&utm_medium=logo)
+-|-|-
+[Zilla Themes](https://zillathemes.com/) | [SebaEBC](https://github.com/sebaebc) | [WP Reset](https://wpreset.com/?utm_source=sweetalert2&utm_medium=logo)
+
+NSFW Sponsors
+-------------
+
+[<img src="https://sweetalert2.github.io/images/sponsors/sex-toy-education.png" width="80">](https://sextoyeducation.com/?utm_source=sweetalert2&utm_medium=logo) | [<img src="https://sweetalert2.github.io/images/sponsors/sextopedia.png" width="80">](https://sextopedia.com/?utm_source=sweetalert2&utm_medium=logo) | [<img src="https://sweetalert2.github.io/images/sponsors/my-sex-toy-guide.jpg" width="80">](https://www.mysextoyguide.com/?utm_source=sweetalert2&utm_medium=logo) | [<img src="https://sweetalert2.github.io/images/sponsors/best-blowjob-machines.jpg" width="80">](https://www.bestblowjobmachines.com/?utm_source=sweetalert2&utm_medium=logo) | [<img src="https://sweetalert2.github.io/images/sponsors/yourdoll.jpg" width="80">](https://www.yourdoll.com/?utm_source=sweetalert2&utm_medium=logo)
+-|-|-|-|-
+[STED](https://sextoyeducation.com/?utm_source=sweetalert2&utm_medium=logo) | [Sextopedia](https://sextopedia.com/?utm_source=sweetalert2&utm_medium=logo) | [My Sex Toy Guide](https://www.mysextoyguide.com/?utm_source=sweetalert2&utm_medium=logo) | [Best Blowjob Machines](https://www.bestblowjobmachines.com/?utm_source=sweetalert2&utm_medium=logo) | [YourDoll](https://www.yourdoll.com/?utm_source=sweetalert2&utm_medium=logo)
+
+[<img src="https://sweetalert2.github.io/images/sponsors/celebjihad.png" width="80">](https://celebjihad.ltd/?utm_source=sweetalert2&utm_medium=logo) | [<img src="https://sweetalert2.github.io/images/sponsors/sextoycollective.jpg" width="80">](https://sextoycollective.com/?utm_source=sweetalert2&utm_medium=logo) | [<img src="https://sweetalert2.github.io/images/sponsors/bingato.png" width="80">](https://bingato.com/?utm_source=sweetalert2&utm_medium=logo) | [<img src="https://sweetalert2.github.io/images/sponsors/realsexdoll.png" width="80">](https://realsexdoll.com/?utm_source=sweetalert2&utm_medium=logo)| [<img src="https://sweetalert2.github.io/images/sponsors/doctorclimax.png" width="80">](https://doctorclimax.com/)
+-|-|-|-|-
+[Celebjihad](https://celebjihad.ltd/?utm_source=sweetalert2&utm_medium=logo) | [STC](https://sextoycollective.com/?utm_source=sweetalert2&utm_medium=logo) | [Bingato](https://bingato.com/?utm_source=sweetalert2&utm_medium=logo) | [RealSexDoll](https://realsexdoll.com/?utm_source=sweetalert2&utm_medium=logo) | [DoctorClimax](https://doctorclimax.com/)
+
+Support and Donations
+---------------------
+
+Has SweetAlert2 helped you create an amazing application? You can show your support via [GitHub Sponsors](https://github.com/sponsors/limonte)
+
+Alternative ways for donations (PayPal, cryptocurrencies, etc.) are listed here: https://sweetalert2.github.io/#donations
+
+### [Hall of Donators :trophy:](DONATIONS.md)

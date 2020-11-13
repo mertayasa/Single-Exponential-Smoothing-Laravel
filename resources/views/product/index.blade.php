@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 
 @push('styles')
-    {{-- <link rel="stylesheet" href="{{asset('admin/vendor/datatables_jquery/datatables.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('admin/vendor/datatables_jquery/datatables.css')}}"> --}}
     <link rel="stylesheet" href="{{asset('plugin/sweetalert2/dist/sweetalert2.css')}}">
-    <link rel="stylesheet" href="{{asset('plugin/iCheck/flat/orange.css')}}"> --}}
+    {{-- <link rel="stylesheet" href="{{asset('plugin/iCheck/flat/orange.css')}}"> --}}
 @endpush
 @section('content')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -62,8 +62,7 @@
 
 @push('scripts')
 {{-- <script src="{{asset('admin/vendor/datatables_jquery/datatables.js')}}"></script> --}}
-{{-- <script src="{{asset('plugin/sweetalert2/dist/sweetalert.min.js')}}"></script> --}}
-<script src="{{asset('js/app.js')}}"></script>
+<script src="{{asset('plugin/sweetalert2/dist/sweetalert2.js')}}"></script>
 <script src="{{asset('plugin/iCheck/icheck.js')}}"></script>
 @include('layouts.admin_js')
 <script>
