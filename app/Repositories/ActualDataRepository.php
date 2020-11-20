@@ -33,4 +33,9 @@ class ActualDataRepository{
         return $save;
     }
 
+    public function findByProductId($product_id){
+        $actual_data = ActualData::where('product_id', $product_id)->get();
+
+        return $actual_data;
+    }
 }

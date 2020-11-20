@@ -4,23 +4,28 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Product;
+use App\Models\Month;
+use MonthSeeder;
 
 class ActualData extends Model
 {
     public $table = 'actual_data';
 
     public $fillable = [
-        'month',
         'actual',
-        'forecast',
-        'product_id'
+        'product_id',
+        'month_id'
     ];
 
     public $with = [
-        'product'
+        'product', 'month'
     ];
 
     public function product(){
         return $this->belongsTo(Product::class);
+    }
+
+    public function month(){
+        return $this->belongsTo(Month::class);
     }
 }

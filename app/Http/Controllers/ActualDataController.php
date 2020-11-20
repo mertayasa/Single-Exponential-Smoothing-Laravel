@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ActualDataDataTable;
 use App\Models\ActualData;
 use App\Repositories\ActualDataRepository;
 use App\Repositories\MonthRepository;
 use App\Repositories\ProductRepository;
+use Exception;
 use Illuminate\Http\Request;
 
 class ActualDataController extends Controller
@@ -22,13 +24,11 @@ class ActualDataController extends Controller
     }
 
     // public function index(ProductDataTable $productDataTable)
-    public function index()
+    public function index(ActualDataDataTable $actualDataDataTable)
     {
         $product = $this->productRepository->getAllData()->pluck('product_name', 'id');
-        $product->prepend('Select Product');
-        $month = $this->monthRepository->getAllData()->pluck('month', 'id');
-        $month->prepend('Select Month');
-        return view('actual_data.index', compact('product', 'month'));
+        $product->prepend('Pilih Produk', 0);
+        return $actualDataDataTable->render('actual_data.index', compact('product'));
     }
 
     /**
@@ -52,13 +52,13 @@ class ActualDataController extends Controller
         $data = $request->all();
 
         try{
-            $this->productRepository->create($data);
+            $this->actualDataRepository->create($data);
         }catch(Exception $e){
             // return array(0, '500 Internal Server Error | Unable To Save Data');
             return array(0, $e->getMessage());
         }
 
-        return array(1, 'Product saved successfully');
+        return array(1, 'Aktual data berhasil ditambahkan');
 
     }
 
@@ -82,11 +82,11 @@ class ActualDataController extends Controller
     public function edit($id)
     {
         try{
-            $product = $this->productRepository->findById($id);
-            if($product){
-                return $product;
+            $actual = $this->actualDataRepository->findById($id);
+            if($actual){
+                return $actual;
             }else{
-                return 'Product Not Found';
+                return 'Data Aktual Tidak Ditemukan';
             }
         }catch(Exception $e){
             return $e->getMessage();
@@ -105,10 +105,10 @@ class ActualDataController extends Controller
         $data = $request->all();
 
         try{
-            $this->productRepository->update($data, $id);
+            $this->actualDataRepository->update($data, $id);
         }catch(Exception $e){
-            return array(0, '500 Internal Server Error | Unable To Save Data');
-            // return array(0, $e->getMessage());
+            // return array(0, '500 Internal Server Error | Unable To Save Data');
+            return array(0, $e->getMessage());
         }
 
         return array(1, 'Category updated successfully');
@@ -128,25 +128,35 @@ class ActualDataController extends Controller
         if(isset($data_id['model_id'])){
             try{
                 foreach($data_id['model_id'] as $data_id){
-                    $product = $this->productRepository->findById($data_id);
+                    $product = $this->actualDataRepository->findById($data_id);
                     if (empty($product)) {
-                        return array(0, 'Product not found');
+                        return array(0, 'Data tidak ditemukan');
                     }
                     $product->delete();
                 }
             }catch(Exception $e){
-                return array(0, '500 Internal Server Error | Cannot Delete Product');
+                return array(0, '500 Internal Server Error | Gagal menghapus data');
             }
             
-            return array(1, 'Product delete successfully');
+            return array(1, 'Data berhasil dihapus');
         }else{
-            $product = $this->productRepository->findById($id);
+            $product = $this->actualDataRepository->findById($id);
             if($product){
                 $product->delete();
             }else{
-                return array(0, 'Product not found');
+                return array(0, 'Data tidak ditemukan');
             };
-            return array(1, 'Product delete successfully');
+            return array(1, 'Data berhasil dihapus');
         }
+    }
+
+    public function getMonthLeft($product_id){
+        $actualData = $this->actualDataRepository->findByProductId($product_id);
+        $allMonth = $this->monthRepository->getAllData()->toArray();
+        foreach($actualData as $actual){
+            array_splice($allMonth, array_search($actual->month_id, $allMonth ), 1);
+        }
+        
+        return $allMonth;
     }
 }
