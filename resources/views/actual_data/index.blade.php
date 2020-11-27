@@ -58,6 +58,7 @@
                         {!! Form::select('product_id', $product, isset($actual_data) ? $actual_data->product_id : 0, ['class' => 'form-control', 'id' => 'productId', 'onChange' => 'triggerMonth(this.value)']) !!}
                         {!! Form::label('actual_data', 'Data Aktual', ['class' => 'mt-4']) !!}
                         {!! Form::number('actual', null, ['class' => 'form-control', 'id' => 'actualData', 'disabled']) !!}
+                        {!! Form::hidden('year', null, ['class' => 'form-control', 'id' => 'yearData']) !!}
                         {!! Form::label('month', 'Bulan', ['class' => 'mt-4']) !!}
                         <select name="month_id" id="monthList" class="form-control" disabled>
                             <option value="0">Pilih Bulan</option>
@@ -82,6 +83,7 @@
     let filterProduct = $('#filterProduct');
     let actualIdField = $('#actualDataId');
     let productIdField = $('#productId');
+    let yearDataField = $('#yearData');
     let productActualDataField = $('#actualData');
     let categorySelect = $('#productCategory');
     let monthSelect = $('#monthList');
@@ -129,9 +131,17 @@
                 success : function(data){
                     console.log(data)
                     monthSelect.html('');
-                    $.each(data, function(key, value) {
-                        monthSelect.append(`<option value="` + value.id + `"> ` + value.month +`  `+ value.year +` </option>`)
-                    });
+                    yearDataField.val('')
+                    if(Array.isArray(data)){
+                        $.each(data, function(key, value) {
+                            monthSelect.append(`<option value="` + value.id + `"> ` + value.month +`  `+ value.year +` </option>`)
+                        });
+                        let last = data[data.length - 1];
+                        yearDataField.val(last.year)
+                    }else{
+                        monthSelect.append(`<option value="` + data.id + `"> ` + data.month +`  `+ data.year +` </option>`)
+                        yearDataField.val(data.year)
+                    }
                 }
             })
         }
@@ -186,6 +196,7 @@
         productActualDataField.prop('disabled', true)
         monthSelect.prop('disabled', true)
         monthSelect.html(`<option>Pilih Bulan</option>`)
+        yearDataField.val('')
     }
 
     // Retrieve data from db for update purpose

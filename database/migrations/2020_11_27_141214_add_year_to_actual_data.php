@@ -14,7 +14,7 @@ class AddYearToActualData extends Migration
     public function up()
     {
         Schema::table('actual_data', function (Blueprint $table) {
-            $table->integer('month');
+            $table->integer('year');
         });
     }
 
@@ -26,7 +26,7 @@ class AddYearToActualData extends Migration
     public function down()
     {
         Schema::table('actual_data', function (Blueprint $table) {
-            $table->dropColumn('month');
+            $table->dropColumn('year');
         });
     }
 }

@@ -14,7 +14,8 @@ class ActualData extends Model
     public $fillable = [
         'actual',
         'product_id',
-        'month_id'
+        'month_id',
+        'year'
     ];
 
     public $with = [
