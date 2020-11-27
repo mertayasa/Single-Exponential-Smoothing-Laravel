@@ -30,7 +30,7 @@
                                     <span>Filter</span>
                                 </div>
                                 <div class="col-9">
-                                    {!! Form::select('product_id', $product, null, ['class' => 'form-control']) !!}
+                                    {!! Form::select('product_id_filter', $product, null, ['class' => 'form-control', 'id' => 'filterProduct']) !!}
                                 </div>
                             </div>
                         </div>
@@ -79,6 +79,7 @@
 @include('layouts.admin_js')
 <script>
 
+    let filterProduct = $('#filterProduct');
     let actualIdField = $('#actualDataId');
     let productIdField = $('#productId');
     let productActualDataField = $('#actualData');
@@ -89,13 +90,13 @@
 
     // Delete Multiple Data
     function initDeleteSelection(){
-        let deleteUrl = "{{ url('actual_data_destroy') }}";
+        let deleteUrl = "{{ url('actual-data-destroy') }}";
         deleteSelection(deleteUrl)
     }
 
     // Delete Single Data
     function initDeleteSingle(id){
-        let deleteUrl = "{{ url('actual_data_destroy') }}"
+        let deleteUrl = "{{ url('actual-data-destroy') }}"
         deleteSingle(id, deleteUrl)
     }
 
@@ -121,16 +122,16 @@
             monthSelect.prop('disabled', false)
             productActualDataField.prop('disabled', false)
             $.ajax({
-                url : "{{url('actual_data_month')}}" + '/' + value,
+                url : "{{url('actual-data-month')}}" + '/' + value,
                 method : 'get',
                 headers : xcsrf,
                 dataType : 'json',
                 success : function(data){
+                    console.log(data)
                     monthSelect.html('');
-                    monthSelect.append(`<option value="` + data[0].id + `"> ` + data[0].month + ` </option>`)
-                    // $.each(data, function(key, value) {
-                    //     monthSelect.append(`<option value="` + value.id + `"> ` + value.month + ` </option>`)
-                    // });
+                    $.each(data, function(key, value) {
+                        monthSelect.append(`<option value="` + value.id + `"> ` + value.month +`  `+ value.year +` </option>`)
+                    });
                 }
             })
         }
@@ -145,10 +146,10 @@
         
         if(url == 'create'){
             method = 'post';
-            urlMethod = "{{ url('actual_data/store')}}";
+            urlMethod = "{{ url('actual-data/store')}}";
         }else{
             method = 'patch';
-            urlMethod = "{{ url('actual_data_update')}}" + '/' + actualIdField.val();
+            urlMethod = "{{ url('actual-data-update')}}" + '/' + actualIdField.val();
         }
 
         $.ajax({
@@ -195,7 +196,7 @@
         let csrf_token = "{{csrf_token()}}"
 
         $.ajax({
-            url : "{{url('actual_data')}}" + '/' + id,
+            url : "{{url('actual-data')}}" + '/' + id,
             method : 'get',
             dataType : 'json',
             headers: {'X-CSRF-TOKEN': csrf_token},
@@ -216,4 +217,10 @@
 
 </script>
 {!! $dataTable->scripts() !!}
+<script>
+    filterProduct.on('change', function(){
+        let dtable = $('#actualdatadatatabletable').DataTable()
+        dtable.column(1).search($(this).val()).draw();
+    })
+</script>
 @endpush

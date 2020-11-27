@@ -14,4 +14,8 @@ class MonthRepository{
     public function getAllData(){
         return $this->month->all();
     }
+
+    public function findById($id){
+        return $this->month->find($id);
+    }
 }

@@ -34,7 +34,13 @@ class ActualDataRepository{
     }
 
     public function findByProductId($product_id){
-        $actual_data = ActualData::where('product_id', $product_id)->get();
+        $actual_data = ActualData::where('product_id', $product_id);
+
+        return $actual_data;
+    }
+
+    public function countLastMonth($month_id, $product_id){
+        $actual_data = ActualData::where('month_id', $month_id)->where('product_id', $product_id)->get()->count();
 
         return $actual_data;
     }

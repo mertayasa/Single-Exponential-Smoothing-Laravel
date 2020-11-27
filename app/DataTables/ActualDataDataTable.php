@@ -3,10 +3,6 @@
 namespace App\DataTables;
 
 use App\Models\ActualData;
-use Yajra\DataTables\Html\Button;
-use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class ActualDataDataTable extends DataTable
@@ -46,11 +42,11 @@ class ActualDataDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('actualdatadatatable-table')
+                    ->setTableId('actualdatadatatabletable')
                     ->columns($this->getColumns())
                     ->addAction(['title' => 'Action', 'width' => '150px', 'printable' => false, 'responsivePriority' => '100', 'id' => 'actionColumn'])
                     ->minifiedAjax()
-                    ->orderBy(5);
+                    ->orderBy(2);
     }
 
     /**
@@ -72,7 +68,12 @@ class ActualDataDataTable extends DataTable
                 'searchable' => false
             ],
             [
+                'data' => 'product.id',
+                'visible' => false
+            ],
+            [
                 'data' => 'id',
+                'name' => 'actual_data.id',
                 'visible' => false
             ],
             [

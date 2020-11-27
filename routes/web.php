@@ -38,13 +38,13 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::patch('product_update/{id}', 'ProductController@update')->name('product.update');
     // Route::get('product_destroy/{id}', 'ProductController@destroy')->name('product.destroy');
 
-    Route::get('actual_data', 'ActualDataController@index')->name('actual_data.index');
-    Route::get('actual_data/create', 'ActualDataController@create')->name('actual_data.create');
-    Route::post('actual_data/store', 'ActualDataController@store')->name('actual_data.store');
-    Route::get('actual_data/{id}', 'ActualDataController@edit')->name('actual_data.edit');
-    Route::patch('actual_data_update/{id}', 'ActualDataController@update')->name('actual_data.update');
-    Route::get('actual_data_destroy/{id}', 'ActualDataController@destroy')->name('actual_data.destroy');
-    Route::get('actual_data_month/{product_id}', 'ActualDataController@getMonthLeft')->name('actual_data.getmonth');
+    Route::get('actual-data', 'ActualDataController@index')->name('actual_data.index');
+    Route::get('actual-data/create', 'ActualDataController@create')->name('actual_data.create');
+    Route::post('actual-data/store', 'ActualDataController@store')->name('actual_data.store');
+    Route::get('actual-data/{id}', 'ActualDataController@edit')->name('actual_data.edit');
+    Route::patch('actual-data-update/{id}', 'ActualDataController@update')->name('actual_data.update');
+    Route::get('actual-data-destroy/{id}', 'ActualDataController@destroy')->name('actual_data.destroy');
+    Route::get('actual-data-month/{product_id}', 'ActualDataController@getMonthLeft')->name('actual_data.getmonth');
 
 });
 
