@@ -134,7 +134,7 @@
                     yearDataField.val('')
                     if(Array.isArray(data)){
                         $.each(data, function(key, value) {
-                            monthSelect.append(`<option value="` + value.id + `"> ` + value.month +`  `+ value.year +` </option>`)
+                            monthSelect.append(`<option value="` + value.data.id + `"> ` + value.data.month +`  `+ value.year +` </option>`)
                         });
                         let last = data[data.length - 1];
                         yearDataField.val(last.year)

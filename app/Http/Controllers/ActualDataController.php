@@ -102,88 +102,104 @@ class ActualDataController extends Controller
     }
 
     public function getMonthLeft($product_id){
-        $actualData = $this->actualDataRepository->findByProductId($product_id)->orderby('created_at', 'DESC')->first();
-        $countLastMonth = $this->actualDataRepository->countLastMonth($actualData['month_id'], $product_id);
-        $allMonth = $this->monthRepository->getAllData()->pluck('id')->toArray();
-        $actualData2 = $this->actualDataRepository->findByProductId($product_id)->orderby('created_at', 'DESC')->pluck('month_id')->toArray();
-        $difference = array_diff($allMonth, $actualData2);
+        $actual_data = $this->actualDataRepository->findByProductId($product_id)->orderby('created_at', 'DESC')->first();
+        $count_last_month = $this->actualDataRepository->countLastMonth($actual_data['month_id'], $product_id);
+        $all_month = $this->monthRepository->getAllData()->pluck('id')->toArray();
+        $all_months = $this->monthRepository->getAllData()->pluck('id', 'month')->toArray();
+        $group_year_in_actual_db = $this->actualDataRepository->findByProductId($product_id)->get()->groupby('year')->toArray();
 
-        $return_month = [];
-        foreach($difference as $month_diff){
-            $month = $this->monthRepository->findById($month_diff)->toArray();
-            array_push($return_month, $month);
-        }
-
-        // return $return_month;
-
-        
-        $init_year = 2020;
-
-        // return $actualData;
-
-        if($countLastMonth == 0){
-            $month = $this->monthRepository->findById(1)->toArray();
-            $month['year'] = $init_year;
-            return $month;
-        }else if($countLastMonth == 1){
-            if($actualData['month_id'] == 12){
-                $month = $this->monthRepository->findById(1)->toArray();
-                $month['year'] = $init_year+1;
-                foreach($return_month as $re_month){
-                    if($re_month < $month){
-                        array_push($month, $re_month);
-                    }
-                }
-                return $month;
-            }else{
-                $month = $this->monthRepository->findById($actualData['month_id']+1)->toArray();
-                $month['year'] = $init_year;
-                $final_month = [];
-                foreach($return_month as $re_month){
-                    if($re_month['id'] < $month['id']){
-                        $re_month['year'] = $init_year;
-                        array_push($final_month, $re_month);
-                    }
-                }
-                array_push($final_month, $month);
-                return $final_month;
-            }
-        }else if($countLastMonth == 2){
-            if($actualData['month_id'] == 12){
-                $month = $this->monthRepository->findById(1);
-                $month['year'] = $init_year+2;
-                return $month;
-            }else{
-                $month = $this->monthRepository->findById($actualData['month_id']+1);
-                $month['year'] = $init_year+1;
-                return $month;
-            }
+        $final_month = [];
+        if(count($group_year_in_actual_db) == 0){
+            array_push($final_month, array('year' => 2020, 'data' => $all_month));
         }else{
-            if($actualData['month_id'] == 12){
-                $month = $this->monthRepository->findById(1);
-                $month['year'] = $init_year+$countLastMonth;
-                return $month;
-            }else{
-                $month = $this->monthRepository->findById($actualData['month_id']+1);
-                $month['year'] = $init_year+$countLastMonth-1;
-                return $month;
+            foreach($group_year_in_actual_db as $key => $group_year){
+                if(count($group_year) < 12){
+                    $count_month_temp = [];
+                    foreach($group_year as $year){
+                        array_push($count_month_temp, $year['month_id']);
+                    }
+                    $difference = array_diff($all_month, $count_month_temp);
+                    foreach($difference as $month_diff){
+                        $month = $this->monthRepository->findById($month_diff)->toArray();
+                        array_push($final_month, array('year' => $key, 'data' => $month));
+                    }
+                }
             }
         }
 
+        $last_year = array_key_last($group_year_in_actual_db);
+        foreach($group_year_in_actual_db[$last_year] as $last){
+            if($last['month_id'] == 12){
+                foreach($all_months as $months){
+                    $month = $this->monthRepository->findById($months)->toArray();
+                    array_push($final_month, array('year' => $key+1, 'data' => $month));
+                }
+            }
+        }
+
+        return $final_month;
     }
 }
 
-// if($actualData->max('month_id') == 12){
-//     return $allMonth;
-// }else{
-//     $index = $actualData->max('month_id');
-//     return array($allMonth[$index]);
-//     // array_splice($allMonth, array_search($actualData->month_id, $allMonth ), 1);
+
+
+
+// $month_in_actual_db = $this->actualDataRepository->findByProductId($product_id)->orderby('created_at', 'DESC')->pluck('month_id')->toArray();
+// $difference = array_diff($all_month, $month_in_actual_db);
+
+// $return_month = [];
+// foreach($difference as $month_diff){
+//     $month = $this->monthRepository->findById($month_diff)->toArray();
+//     array_push($return_month, $month);
 // }
-// // foreach($actualData as $actual){
-// //     if($actual->month_id < 12){
-// //         array_splice($allMonth, array_search($actual->month_id, $allMonth ), 1);
-// //     }else{
-// //         return $allMonth;
-// //     }
-// // }
+
+// $init_year = 2020;
+
+// if($count_last_month == 0){
+//     $month = $this->monthRepository->findById(1)->toArray();
+//     $month['year'] = $init_year;
+//     return $month;
+// }else if($count_last_month == 1){
+//     if($actual_data['month_id'] == 12){
+//         $month = $this->monthRepository->findById(1)->toArray();
+//         $month['year'] = $init_year+1;
+//         foreach($return_month as $re_month){
+//             if($re_month < $month){
+//                 array_push($month, $re_month);
+//             }
+//         }
+//         return $month;
+//     }else{
+//         $month = $this->monthRepository->findById($actual_data['month_id']+1)->toArray();
+//         $month['year'] = $init_year;
+//         $final_month = [];
+//         foreach($return_month as $re_month){
+//             if($re_month['id'] < $month['id']){
+//                 $re_month['year'] = $init_year;
+//                 array_push($final_month, $re_month);
+//             }
+//         }
+//         array_push($final_month, $month);
+//         return $final_month;
+//     }
+// }else if($count_last_month == 2){
+//     if($actual_data['month_id'] == 12){
+//         $month = $this->monthRepository->findById(1);
+//         $month['year'] = $init_year+2;
+//         return $month;
+//     }else{
+//         $month = $this->monthRepository->findById($actual_data['month_id']+1);
+//         $month['year'] = $init_year+1;
+//         return $month;
+//     }
+// }else{
+//     if($actual_data['month_id'] == 12){
+//         $month = $this->monthRepository->findById(1);
+//         $month['year'] = $init_year+$count_last_month;
+//         return $month;
+//     }else{
+//         $month = $this->monthRepository->findById($actual_data['month_id']+1);
+//         $month['year'] = $init_year+$count_last_month-1;
+//         return $month;
+//     }
+// }
