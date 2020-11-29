@@ -17,6 +17,9 @@ class ActualDataDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->editColumn('month', function($actual_data){
+                return $actual_data->month->month.' '.$actual_data->year;
+            })
             ->editColumn('selection', function($actual_data){
                 return view('actual_data.datatables_check', compact('actual_data'));
             })
@@ -81,7 +84,8 @@ class ActualDataDataTable extends DataTable
                 'title' => 'Nama Product'
             ],
             [
-                'data' => 'month.month',
+                'data' => 'month',
+                'name' => 'month',
                 'title' => 'Bulan'
             ],
             [

@@ -57,10 +57,10 @@
                         {!! Form::label('product_id', 'Produk') !!}
                         {!! Form::select('product_id', $product, isset($actual_data) ? $actual_data->product_id : 0, ['class' => 'form-control', 'id' => 'productId', 'onChange' => 'triggerMonth(this.value)']) !!}
                         {!! Form::label('actual_data', 'Data Aktual', ['class' => 'mt-4']) !!}
-                        {!! Form::number('actual', null, ['class' => 'form-control', 'id' => 'actualData', 'disabled']) !!}
+                        {!! Form::number('actual', null, ['class' => 'form-control', 'id' => 'actualData', 'disabled', 'onKeyUp="validate(this, event)"']) !!}
                         {!! Form::hidden('year', null, ['class' => 'form-control', 'id' => 'yearData']) !!}
                         {!! Form::label('month', 'Bulan', ['class' => 'mt-4']) !!}
-                        <select name="month_id" id="monthList" class="form-control" disabled>
+                        <select name="month_id" id="monthList" class="form-control" disabled onChange="changeYearValue()">
                             <option value="0">Pilih Bulan</option>
                         </select>
                     </form>
@@ -89,6 +89,7 @@
     let monthSelect = $('#monthList');
     let buttonSubmit = $('.btn-submit');
     let closeButton = $('.close');
+    let timeSeriesData = [];
 
     // Delete Multiple Data
     function initDeleteSelection(){
@@ -130,6 +131,7 @@
                 dataType : 'json',
                 success : function(data){
                     console.log(data)
+                    timeSeriesData.push(data)
                     monthSelect.html('');
                     yearDataField.val('')
                     if(Array.isArray(data)){
@@ -137,7 +139,7 @@
                             monthSelect.append(`<option value="` + value.data.id + `"> ` + value.data.month +`  `+ value.year +` </option>`)
                         });
                         let last = data[data.length - 1];
-                        yearDataField.val(last.year)
+                        yearDataField.val(data[0].year)
                     }else{
                         monthSelect.append(`<option value="` + data.id + `"> ` + data.month +`  `+ data.year +` </option>`)
                         yearDataField.val(data.year)
@@ -145,6 +147,12 @@
                 }
             })
         }
+    }
+
+    function changeYearValue(){
+        let selectedOption = $("#monthList option:selected" ).text();
+        let splitTextSelected = selectedOption.split(" ")
+        yearDataField.val(splitTextSelected[3])
     }
 
     // Submit Form

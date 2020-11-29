@@ -48,7 +48,7 @@
         if(typeof model_id !== 'undefined' && model_id.length == 0){ // Check if no data selected, and return error
             Swal.fire({
                 title: 'Warning',
-                text: "No data selected",
+                text: "Silahkan pilih data yang ingin dihapus",
                 icon: 'warning',
                 confirmButtonColor: '#169b6b',
                 cancelButtonColor: '#d33',
@@ -56,13 +56,14 @@
             })
         }else{
             Swal.fire({
-                title: '{{trans("alert.alert_delete_prompt")}}',
-                text: "{!!trans('alert.alert_delete_warning')!!}",
+                title: 'Warning',
+                text: "Yakin untuk menghapus data ? ",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#169b6b',
                 cancelButtonColor: '#d33',
-                confirmButtonText: '{{trans("alert.alert_delete_confirm")}}'
+                cancelButtonText: 'Tidak',
+                confirmButtonText: 'Ya'
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
@@ -98,13 +99,14 @@
 
     function deleteSingle(id, deleteUrl){
         Swal.fire({
-            title: '{{trans("alert.alert_delete_prompt")}}',
-            text: "{!!trans('alert.alert_delete_warning')!!}",
+            title: 'Warning',
+            text: "Yakin untuk menghapus data ? ",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#169b6b',
             cancelButtonColor: '#d33',
-            confirmButtonText: '{{trans("alert.alert_delete_confirm")}}'
+            cancelButtonText: 'Tidak',
+            confirmButtonText: 'Ya'
         }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
@@ -133,6 +135,19 @@
                 })
             }
         })
+    }
+
+    function validate(input, e){
+        if(input.type == 'number'){            
+            let inputValue = input.value;
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57 || inputValue.indexOf('0') == 0)) {
+                $(input).addClass('is-invalid')
+                $('.btn-submit').prop('disabled', true)
+            }else{
+                $(input).removeClass('is-invalid')
+                $('.btn-submit').prop('disabled', false)
+            }
+        }
     }
 
 
