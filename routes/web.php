@@ -48,6 +48,54 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
+Route::get('asdasd', function(){
+    $data = [
+        [
+            'month' => 'Januari',
+            'data' => 100,
+        ],
+        [
+            'month' => 'Februari',
+            'data' => 110,
+        ],
+        [
+            'month' => 'Maret',
+            'data' => 105,
+        ],
+        [
+            'month' => 'April',
+            'data' => 120,
+        ],
+        [
+            'month' => 'Mei',
+            'data' => 115,
+        ],
+        [
+            'month' => 'Juni',
+            'data' => 117,
+        ],
+    ];
+
+    $alpha = 0.2;
+    $forecast = [];
+    $init_forecast = $data[0]['data'];
+    $last = [];
+    foreach($data as $key => $value){
+        if($key !== 0 && $key !== 1){
+            if($key == 2){
+                $last = $data[$key-1]['data'] + $alpha * (($data[$key-1]['data'] - $init_forecast));
+                array_push($forecast, array('month' => $value['month'] , 'forecast' => $last));
+            }
+            else{
+                $last = $data[$key-1]['data'] + ($alpha * ($data[$key-1]['data'] - $last));
+                array_push($forecast, array('month' => $value['month'] , 'forecast' => $last));
+            }
+        }
+    }
+
+    return dd($forecast);
+});
+
 // Route::get('split', function () {
 //     $int = "170030209";
 //     $split = str_split($int, strlen($int)/4);
