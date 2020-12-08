@@ -79,10 +79,6 @@ class ProductDataTable extends DataTable
                 'data' => 'product_name',
                 'title' => 'Nama Product'
             ],
-            [
-                'data' => 'product_category.category_name',
-                'title' => 'Kategori Produk'
-            ],
         ];
 
         return $columns;

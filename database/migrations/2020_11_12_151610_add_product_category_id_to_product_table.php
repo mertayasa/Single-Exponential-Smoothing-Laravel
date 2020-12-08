@@ -13,10 +13,10 @@ class AddProductCategoryIdToProductTable extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->unsignedInteger('product_category_id');
-            $table->foreign('product_category_id')->references('id')->on('product_categories')->onDelete('cascade')->onUpdate('cascade');
-        });
+        // Schema::table('products', function (Blueprint $table) {
+        //     $table->unsignedInteger('product_category_id');
+        //     $table->foreign('product_category_id')->references('id')->on('product_categories')->onDelete('cascade')->onUpdate('cascade');
+        // });
     }
 
     /**

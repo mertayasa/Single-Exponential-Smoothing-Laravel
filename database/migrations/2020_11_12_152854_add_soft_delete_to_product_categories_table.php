@@ -13,9 +13,9 @@ class AddSoftDeleteToProductCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::table('product_categories', function (Blueprint $table) {
-            $table->softDeletes();
-        });
+        // Schema::table('product_categories', function (Blueprint $table) {
+        //     $table->softDeletes();
+        // });
     }
 
     /**

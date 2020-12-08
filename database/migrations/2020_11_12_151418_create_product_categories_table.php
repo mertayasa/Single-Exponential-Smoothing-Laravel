@@ -13,11 +13,11 @@ class CreateProductCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_categories', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('category_name', 255);
-            $table->timestamps();
-        });
+        // Schema::create('product_categories', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->string('category_name', 255);
+        //     $table->timestamps();
+        // });
     }
 
     /**
@@ -25,8 +25,8 @@ class CreateProductCategoriesTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
-        Schema::dropIfExists('product_categories');
-    }
+    // public function down()
+    // {
+    //     Schema::dropIfExists('product_categories');
+    // }
 }

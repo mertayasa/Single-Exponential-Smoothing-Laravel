@@ -47,8 +47,8 @@
                         <input type="hidden" name="product_id" id="productId">
                         {!! Form::label('product_name', 'Nama Produk') !!}
                         <input type="text" class="form-control" name="product_name" id="productName">
-                        {!! Form::label('product_category_id', 'Kategori Product', ['class' => 'mt-4']) !!}
-                        {!! Form::select('product_category_id', $category, isset($product) ? $product->product_category_id : 0, ['class' => 'form-control', 'id' => 'productCategory']) !!}
+                        {{-- {!! Form::label('product_category_id', 'Kategori Product', ['class' => 'mt-4']) !!} --}}
+                        {{-- {!! Form::select('product_category_id', $category, isset($product) ? $product->product_category_id : 0, ['class' => 'form-control', 'id' => 'productCategory']) !!} --}}
                     </form>
                 </div>
                 <div class="modal-footer">

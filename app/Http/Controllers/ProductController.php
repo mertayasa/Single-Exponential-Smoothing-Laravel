@@ -13,18 +13,14 @@ class ProductController extends Controller
 {
 
     protected $productRepository;
-    protected $productCategoryRepository;
 
-    public function __construct(ProductRepository $productRepo, ProductCategoryRepository $productCategoryRepo){
+    public function __construct(ProductRepository $productRepo){
         $this->productRepository = $productRepo;
-        $this->productCategoryRepository = $productCategoryRepo;
     }
 
     public function index(ProductDataTable $productDataTable)
     {
-        $category = $this->productCategoryRepository->getAllData()->pluck('category_name', 'id');
-        $category->prepend('Select Category');
-        return $productDataTable->render('product.index', compact('category'));
+        return $productDataTable->render('product.index');
     }
 
     /**
