@@ -9,6 +9,7 @@ use App\Repositories\ProductRepository;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ActualDataController extends Controller
 {
@@ -38,6 +39,7 @@ class ActualDataController extends Controller
             $this->actualDataRepository->create($data);
         }catch(Exception $e){
             // return array(0, '500 Internal Server Error | Unable To Save Data');
+            Log::info($e->getMessage());
             return array(0, $e->getMessage());
         }
 

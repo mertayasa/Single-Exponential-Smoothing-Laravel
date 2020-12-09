@@ -227,6 +227,7 @@
                 productIdField.append(`<option value="` + data.product.id + `"> ` + data.product.product_name + ` </option>`)
                 productActualDataField.prop('disabled', false)
                 productActualDataField.val(data.actual)
+                yearDataField.val(data.year)
                 monthSelect.html('');
                 monthSelect.append(`<option value="` + data.month.id + `"> ` + data.month.month + ` </option>`)
             }
