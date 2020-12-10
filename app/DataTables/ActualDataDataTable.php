@@ -5,16 +5,9 @@ namespace App\DataTables;
 use App\Models\ActualData;
 use Yajra\DataTables\Services\DataTable;
 
-class ActualDataDataTable extends DataTable
-{
-    /**
-     * Build DataTable class.
-     *
-     * @param mixed $query Results from query() method.
-     * @return \Yajra\DataTables\DataTableAbstract
-     */
-    public function dataTable($query)
-    {
+class ActualDataDataTable extends DataTable{
+
+    public function dataTable($query){
         return datatables()
             ->eloquent($query)
             ->editColumn('month', function($actual_data){
@@ -26,24 +19,11 @@ class ActualDataDataTable extends DataTable
             ->addColumn('action', 'product.datatables_action');
     }
 
-    /**
-     * Get query source of dataTable.
-     *
-     * @param \App\Models\ActualDataDataTable $model
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function query(ActualData $model)
-    {
+    public function query(ActualData $model){
         return $model->newQuery()->with('month');
     }
 
-    /**
-     * Optional method if you want to use html builder.
-     *
-     * @return \Yajra\DataTables\Html\Builder
-     */
-    public function html()
-    {
+    public function html(){
         return $this->builder()
                     ->setTableId('actualdatadatatabletable')
                     ->columns($this->getColumns())
@@ -52,13 +32,7 @@ class ActualDataDataTable extends DataTable
                     ->orderBy(2);
     }
 
-    /**
-     * Get columns.
-     *
-     * @return array
-     */
-    protected function getColumns()
-    {
+    protected function getColumns(){
         $columns = [
             [
                 'data'  => 'selection',
@@ -101,13 +75,7 @@ class ActualDataDataTable extends DataTable
         return $columns;
     }
 
-    /**
-     * Get filename for export.
-     *
-     * @return string
-     */
-    protected function filename()
-    {
+    protected function filename(){
         return 'ActualData_' . date('YmdHis');
     }
 }

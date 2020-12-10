@@ -2,27 +2,24 @@
 
 namespace App\DataTables;
 
-use App\Models\Product;
+use App\Models\Forecast;
 use Yajra\DataTables\Services\DataTable;
 
-class ProductDataTable extends DataTable{
+class ForecastDataTable extends DataTable{
 
     public function dataTable($query){
         return datatables()
             ->eloquent($query)
-            ->editColumn('selection', function($product){
-                return view('product.datatables_check', compact('product'));
-            })
             ->addColumn('action', 'product.datatables_action');
     }
 
-    public function query(Product $model){
-        return $model->newQuery();
+    public function query(Forecast $model){
+        return $model->newQuery()->with('product')->with('month');
     }
 
     public function html(){
         return $this->builder()
-                    ->setTableId('productdatatable-table')
+                    ->setTableId('forecastdatatable-table')
                     ->columns($this->getColumns())
                     ->addAction(['title' => 'Action', 'width' => '150px', 'printable' => false, 'responsivePriority' => '100', 'id' => 'actionColumn'])
                     ->minifiedAjax()
@@ -32,22 +29,28 @@ class ProductDataTable extends DataTable{
     protected function getColumns(){
         $columns = [
             [
-                'data'  => 'selection',
-                'name'  => '#',
-                'title'  => "<input type='checkbox' name='check_all' id='check_all'>",
-                'width' => '3%',
-                'orderable' => false,
-                'exportable' => false,
-                'printable' => false,
-                'searchable' => false
-            ],
-            [
                 'data' => 'id',
                 'visible' => false
             ],
             [
-                'data' => 'product_name',
+                'data' => 'product.product_name',
                 'title' => 'Nama Product'
+            ],
+            [
+                'data' => 'month.month',
+                'title' => 'Bulan'
+            ],
+            [
+                'data' => 'alpha',
+                'title' => 'Alpha'
+            ],
+            [
+                'data' => 'forecast',
+                'title' => 'Peramalan'
+            ],
+            [
+                'data' => 'year',
+                'title' => 'Tahun'
             ],
         ];
 
@@ -55,6 +58,6 @@ class ProductDataTable extends DataTable{
     }
 
     protected function filename(){
-        return 'Product_' . date('YmdHis');
+        return 'Forecast_' . date('YmdHis');
     }
 }

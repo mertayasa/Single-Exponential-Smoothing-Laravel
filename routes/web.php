@@ -32,6 +32,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('product_update/{id}', 'ProductController@update')->name('product.update');
     Route::get('product_destroy/{id}', 'ProductController@destroy')->name('product.destroy');
 
+    Route::get('forecast', 'ForecastController@index')->name('forecast.index');
+    Route::get('forecast/create', 'ForecastController@create')->name('forecast.create');
+    Route::post('forecast/store', 'ForecastController@store')->name('forecast.store');
+    Route::get('forecast/{id}', 'ForecastController@edit')->name('forecast.edit');
+    Route::patch('forecast_update/{id}', 'ForecastController@update')->name('forecast.update');
+    Route::get('forecast_destroy/{id}', 'ForecastController@destroy')->name('forecast.destroy');
+
     Route::get('actual-data', 'ActualDataController@index')->name('actual_data.index');
     Route::get('actual-data/create', 'ActualDataController@create')->name('actual_data.create');
     Route::post('actual-data/store', 'ActualDataController@store')->name('actual_data.store');
@@ -164,6 +171,10 @@ Route::get('asdasd', function(){
 
     return dump($single_data);
 
+});
+
+Route::get('anjay', function(){
+    return view('test.index');
 });
 
 // Route::get('split', function () {

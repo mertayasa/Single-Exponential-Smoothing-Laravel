@@ -34,7 +34,7 @@
 <hr class="sidebar-divider">
 
 <li class="nav-item {{Request::is('forecast*') ? 'active' : ''}}">
-<a class="nav-link" href="{{route('product.index')}}">
+<a class="nav-link" href="{{route('forecast.index')}}">
     <i class="fas fa-chart-bar"></i>
     <span>Peramalan</span></a>
 </li>

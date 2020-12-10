@@ -2,84 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ForecastDataTable;
 use App\models\Forecast;
 use Illuminate\Http\Request;
 
-class ForecastController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
+class ForecastController extends Controller{
+
+    public function index(ForecastDataTable $forecastDataTable){
+        $data = Forecast::orderBy('id', 'DESC')->get()->groupBy('product_id')->toArray();
+
+        dd($data);
+        // return $forecastDataTable->render('forecast.index');
+    }
+
+    public function create(){
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
+    public function store(Request $request){
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
+    public function show(Forecast $forecast){
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\models\Forecast  $forecast
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Forecast $forecast)
-    {
+    public function edit(Forecast $forecast){
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\models\Forecast  $forecast
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Forecast $forecast)
-    {
+    public function update(Request $request, Forecast $forecast){
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\models\Forecast  $forecast
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Forecast $forecast)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\models\Forecast  $forecast
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Forecast $forecast)
-    {
+    public function destroy(Forecast $forecast){
         //
     }
 }
