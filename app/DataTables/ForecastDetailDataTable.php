@@ -3,39 +3,32 @@
 namespace App\DataTables;
 
 use App\Models\Forecast;
+use Yajra\DataTables\Html\Button;
+use Yajra\DataTables\Html\Column;
+use Yajra\DataTables\Html\Editor\Editor;
+use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class ForecastDataTable extends DataTable{
+class ForecastDetailDataTable extends DataTable{
 
     public function dataTable($query){
         return datatables()
             ->collection($query)
             ->editColumn('month', function($forecast){
                 return $forecast['month']['month'].' '.$forecast['year'];
-            })
-            ->addColumn('action', function($forecast){
-                $product_id = $forecast['product_id'];
-                return view('forecast.datatables_action', compact('product_id'));
             });
-            // ->addColumn('action', 'forecast.datatables_action');
     }
 
     public function query(Forecast $model){
-        $all_data = Forecast::orderBy('id', 'DESC')->get()->groupBy('product_id')->toArray();
-
-        $temp = [];
-        foreach($all_data as $data){
-            array_push($temp, $data[0]);
-        }
-
-        return collect($temp);
+        $forecast = Forecast::where('product_id', $this->product_id)->get()->toArray();
+        return collect($forecast);
+        return $model->newQuery();
     }
 
     public function html(){
         return $this->builder()
-                    ->setTableId('forecastdatatable-table')
+                    ->setTableId('forecastdetaildatatable-table')
                     ->columns($this->getColumns())
-                    ->addAction(['title' => 'Action', 'width' => '150px', 'printable' => false, 'responsivePriority' => '100', 'id' => 'actionColumn'])
                     ->minifiedAjax()
                     ->searching(false)
                     ->orderBy(1);
@@ -51,6 +44,7 @@ class ForecastDataTable extends DataTable{
                 'data' => 'product.product_name',
                 'title' => 'Nama Product',
                 'orderable' => false,
+                'searchable' => false,
             ],
             [
                 'data' => 'month',
@@ -76,6 +70,6 @@ class ForecastDataTable extends DataTable{
     }
 
     protected function filename(){
-        return 'Forecast_' . date('YmdHis');
+        return 'ForecastDetail_' . date('YmdHis');
     }
 }

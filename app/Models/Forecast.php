@@ -14,6 +14,11 @@ class Forecast extends Model
         'year',
     ];
 
+    protected $with = [
+        'product',
+        'month'
+    ];
+
     public function product(){
         return $this->belongsTo(Product::class);
     }

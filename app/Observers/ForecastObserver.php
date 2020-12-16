@@ -65,7 +65,7 @@ class ForecastObserver{
 
             // Init forecast for index 2
             $init_forecast = $actuals[0]['actual'];
-             Log::info($init_forecast);
+            //  Log::info($init_forecast);
 
             // Store temporary last farecast
             $last = [];
@@ -142,13 +142,19 @@ class ForecastObserver{
 
             // Forecast for next month
             $last = $end02['forecast'] + (($alphas[0] * ($end02['actual'] - $end02['forecast'])));
-            array_push($forecast_02, array('product_id' => $actuals[0]['product_id'], 'year' => $value['year'],'month_id' => $value['month_id']+1 , 'alpha' => $alphas[0], 'forecast' => $last));
+            $future_month02 = $end02['month_id'] == 12 ? 1 : $end02['month_id']+1;
+            $year02 = $end02['month_id'] == 12 ? $end02['year']+1 : $end02['year'];
+            array_push($forecast_02, array('product_id' => $actuals[0]['product_id'], 'year' => $year02,'month_id' => $future_month02 , 'alpha' => $alphas[0], 'forecast' => $last));
             
             $last = $end05['forecast'] + (($alphas[1] * ($end05['actual'] - $end05['forecast'])));
-            array_push($forecast_05, array('product_id' => $actuals[0]['product_id'], 'year' => $value['year'],'month_id' => $value['month_id']+1 , 'alpha' => $alphas[1], 'forecast' => $last));
+            $future_month05 = $end05['month_id'] == 12 ? 1 : $end02['month_id']+1;
+            $year05 = $end05['month_id'] == 12 ? $end05['year']+1 : $end05['year'];
+            array_push($forecast_05, array('product_id' => $actuals[0]['product_id'], 'year' => $year05,'month_id' => $future_month05 , 'alpha' => $alphas[1], 'forecast' => $last));
             
             $last = $end08['forecast'] + (($alphas[2] * ($end08['actual'] - $end08['forecast'])));
-            array_push($forecast_08, array('product_id' => $actuals[0]['product_id'], 'year' => $value['year'],'month_id' => $value['month_id']+1 , 'alpha' => $alphas[2], 'forecast' => $last));
+            $future_month08 = $end08['month_id'] == 12 ? 1 : $end02['month_id']+1;
+            $year08 = $end08['month_id'] == 12 ? $end08['year']+1 : $end08['year'];
+            array_push($forecast_08, array('product_id' => $actuals[0]['product_id'], 'year' => $year08,'month_id' => $future_month08 , 'alpha' => $alphas[2], 'forecast' => $last));
 
             // Group fixed forecast
             $all_forecast_fix = array('02' => $forecast_02, '05' => $forecast_05, '08' => $forecast_08);

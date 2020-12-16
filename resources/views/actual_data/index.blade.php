@@ -22,7 +22,6 @@
                             {{-- <button class="btn btn-warning mb-3 mr-2" onclick="location.href='{{route('subdivision_group.create')}}'">🞤 Create</button> --}}
                             <button type="button" class="btn btn-primary mb-3 mr-2" onclick="showCreateModal()" data-target="#actualDataModal" data-toggle="modal">+ Tambah Data</button>
                             <button class="btn btn-danger mb-3 mr-2" onclick="initDeleteSelection()"> <i class="fa fa-trash"></i> Hapus Pilihan</button>
-                            <button class="btn btn-warning mb-3" onclick="window.location.href='{{url('forecast')}}'"> <i class="fas fa-search-dollar"></i> Mulai Peramalan </button>
                         </div>
                         <div class="col-6 mt-3 mb-3">
                             <div class="row align-items-center">
