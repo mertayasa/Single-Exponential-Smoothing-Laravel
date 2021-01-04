@@ -49,6 +49,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('actual-data-destroy/{id}', 'ActualDataController@destroy')->name('actual_data.destroy');
     Route::get('actual-data-month/{product_id}', 'ActualDataController@getMonthLeft')->name('actual_data.getmonth');
 
+    Route::get('forecast-export/{method}', 'ForecastController@exportOveral')->name('forecast.export_overal');
+    Route::get('forecast-export/{method}/{product_id}', 'ForecastController@exportHistory')->name('forecast.export_histori');
+
 });
 
 Route::get('asdasd', function(){
@@ -206,5 +209,42 @@ Route::get('anjay', function(){
 //     }
 
 // });
+
+Route::get('fcm', function () {
+    $url = 'https://fcm.googleapis.com/fcm/send';
+
+    $fields = array (
+            "topic" => "subdivision",
+            'notification' => array (
+                "body" => "sdhlasdhlasdhaideabcsjcbakjc",
+                "click_action" => "FLUTTER_NOTIFICATION_CLICK",
+                "sound" => "default",
+                "title" => "postman"          
+            ),
+            'data' => array (
+                "body" => "sdhlasdhlasdhaideabcsjcbakjc",
+                "click_action" => "FLUTTER_NOTIFICATION_CLICK",
+                "sound" => "default",
+                "title" => "postman" 
+            )
+    );
+    $fields = json_encode ( $fields );
+
+    $headers = array (
+            'Authorization: key=' . "AAAAGxMtx-w:APA91bGoMNhAXrb3CQ9QHGAwULH-HN-44DMc0uY7mAB991R248BEafSszKZzXnIuWBzBRUqRi-U4fEvnxiU_KfgxT-4qUdmdnw2-kyX7kP_FNpC3DbJyIR5ugJtpnrutek6ebw39b9WV",
+            'Content-Type: application/json'
+    );
+
+    $ch = curl_init ();
+    curl_setopt ( $ch, CURLOPT_URL, $url );
+    curl_setopt ( $ch, CURLOPT_POST, true );
+    curl_setopt ( $ch, CURLOPT_HTTPHEADER, $headers );
+    curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
+    curl_setopt ( $ch, CURLOPT_POSTFIELDS, $fields );
+
+    $result = curl_exec ( $ch );
+    echo $result;
+    curl_close ( $ch );
+});
 
 Auth::routes();

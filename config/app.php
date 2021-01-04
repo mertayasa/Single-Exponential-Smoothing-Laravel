@@ -177,6 +177,11 @@ return [
         App\Providers\LineChatbotProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
 
+        Yajra\DataTables\DataTablesServiceProvider::class,
+        Yajra\DataTables\ButtonsServiceProvider::class,
+
+        Barryvdh\DomPDF\ServiceProvider::class,
+
     ],
 
     /*
@@ -230,6 +235,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'LineBot' => App\Service\LineService::class,
+
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

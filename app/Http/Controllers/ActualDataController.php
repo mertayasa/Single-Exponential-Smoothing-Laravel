@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ActualDataDataTable;
+use App\Exports\OveralForecastExport;
+use App\models\Forecast;
 use App\Repositories\ActualDataRepository;
 use App\Repositories\MonthRepository;
 use App\Repositories\ProductRepository;
@@ -10,6 +12,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ActualDataController extends Controller
 {

@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use App\DataTables\ForecastDataTable;
 use App\DataTables\ForecastDetailDataTable;
+use App\Exports\ForecastExport;
+use App\Exports\OveralForecastExport;
 use App\models\Forecast;
 use App\Repositories\ForecastRepository;
+use Barryvdh\DomPDF\Facade as PDF;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ForecastController extends Controller{
 
@@ -34,7 +39,7 @@ class ForecastController extends Controller{
         // dd($forecast);
         if($forecast){
             $product_name = $forecast[0]['product']['product_name'];
-            return $forecastDetailDataTable->with('product_id', $product_id)->render('forecast.detail', compact('product_name'));
+            return $forecastDetailDataTable->with('product_id', $product_id)->render('forecast.detail', compact('product_name', 'product_id'));
         }else{
             abort(404);
         }
@@ -50,5 +55,40 @@ class ForecastController extends Controller{
 
     public function destroy(Forecast $forecast){
         //
+    }
+
+    public function exportOveral($method){
+        $all_data = Forecast::orderBy('id', 'DESC')->get()->groupBy('product_id')->toArray();
+        
+        $overal_forecast = [];
+        foreach($all_data as $data){
+            array_push($overal_forecast, $data[0]);
+        }
+        $title = 'Rangkuman Peramalan';
+        
+        if($method == 'excel'){
+            return Excel::download(new ForecastExport($overal_forecast), $title.' '.Carbon::now().'.xlsx');
+        }else if($method == 'pdf'){
+            // $export_data = $overal_forecast;
+            // return view('export.export_pdf', compact('export_data'));
+            $pdf = PDF::loadview('export.export_pdf',['export_data' => $overal_forecast]);
+            return $pdf->download($title.' '.Carbon::now().'.pdf');
+        }
+    }
+
+    public function exportHistory($method, $product_id){
+        $overal_forecast = Forecast::where('product_id', $product_id)->get()->toArray();
+        $title = 'Riwayat Peramalan';
+
+        // dd($overal_forecast);
+        
+        if($method == 'excel'){
+            return Excel::download(new ForecastExport($overal_forecast), $title.' '.Carbon::now().'.xlsx');
+        }else if($method == 'pdf'){
+            // $export_data = $overal_forecast;
+            // return view('export.export_pdf', compact('export_data'));
+            $pdf = PDF::loadview('export.export_pdf',['export_data' => $overal_forecast]);
+            return $pdf->download($title.' '.Carbon::now().'.pdf');
+        }
     }
 }

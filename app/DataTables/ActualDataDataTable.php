@@ -29,6 +29,10 @@ class ActualDataDataTable extends DataTable{
                     ->columns($this->getColumns())
                     ->addAction(['title' => 'Action', 'width' => '150px', 'printable' => false, 'responsivePriority' => '100', 'id' => 'actionColumn'])
                     ->minifiedAjax()
+                    ->parameters([
+                        'buttons' => ['export'],
+                    ])
+                    // ->searching(false)
                     ->orderBy(2);
     }
 
@@ -60,7 +64,8 @@ class ActualDataDataTable extends DataTable{
             [
                 'data' => 'month',
                 'name' => 'month',
-                'title' => 'Bulan'
+                'title' => 'Bulan',
+                'searchable' => false
             ],
             [
                 'data' => 'actual',

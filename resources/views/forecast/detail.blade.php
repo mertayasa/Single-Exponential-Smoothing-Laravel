@@ -19,6 +19,8 @@
                 <div class="col-12 p-0 mb-3">
                     <div class="row">
                         <div class="col-6 d-flex">
+                            <a href="{{route('forecast.export_histori', ['excel', $product_id])}}" class="btn btn-primary mr-2">Export Excel</a>
+                            <a href="{{route('forecast.export_histori', ['pdf', $product_id])}}" class="btn btn-success">Export Pdf</a>
                         </div>
                     </div>
                 </div>
