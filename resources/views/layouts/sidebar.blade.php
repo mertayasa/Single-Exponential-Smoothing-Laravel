@@ -17,10 +17,10 @@
 
 <hr class="sidebar-divider">
 
-<li class="nav-item {{Request::is('product*') ? 'active' : ''}}">
-<a class="nav-link" href="{{route('product.index')}}">
+<li class="nav-item {{Request::is('menu*') ? 'active' : ''}}">
+<a class="nav-link" href="{{route('menu.index')}}">
     <i class="fas fa-shopping-bag"></i>
-    <span>Produk</span></a>
+    <span>Menu</span></a>
 </li>
 
 <hr class="sidebar-divider">

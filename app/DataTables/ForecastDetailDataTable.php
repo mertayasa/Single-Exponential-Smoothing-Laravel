@@ -31,7 +31,7 @@ class ForecastDetailDataTable extends DataTable{
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->searching(false)
-                    ->orderBy(1);
+                    ->orderBy(0, 'desc');
     }
 
     protected function getColumns(){

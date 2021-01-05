@@ -47,7 +47,7 @@ class ProductDataTable extends DataTable{
             ],
             [
                 'data' => 'product_name',
-                'title' => 'Nama Product'
+                'title' => 'Nama Menu'
             ],
         ];
 

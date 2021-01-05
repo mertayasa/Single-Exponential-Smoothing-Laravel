@@ -10,7 +10,7 @@ class ActualDataDataTable extends DataTable{
     public function dataTable($query){
         return datatables()
             ->eloquent($query)
-            ->editColumn('month', function($actual_data){
+            ->editColumn('month_detail', function($actual_data){
                 return $actual_data->month->month.' '.$actual_data->year;
             })
             ->editColumn('selection', function($actual_data){
@@ -20,7 +20,7 @@ class ActualDataDataTable extends DataTable{
     }
 
     public function query(ActualData $model){
-        return $model->newQuery()->with('month');
+        return $model->newQuery();
     }
 
     public function html(){
@@ -29,10 +29,6 @@ class ActualDataDataTable extends DataTable{
                     ->columns($this->getColumns())
                     ->addAction(['title' => 'Action', 'width' => '150px', 'printable' => false, 'responsivePriority' => '100', 'id' => 'actionColumn'])
                     ->minifiedAjax()
-                    ->parameters([
-                        'buttons' => ['export'],
-                    ])
-                    // ->searching(false)
                     ->orderBy(2);
     }
 
@@ -62,10 +58,20 @@ class ActualDataDataTable extends DataTable{
                 'title' => 'Nama Product'
             ],
             [
-                'data' => 'month',
-                'name' => 'month',
+                'data' => 'month_detail',
+                'name' => 'month_detail',
                 'title' => 'Bulan',
                 'searchable' => false
+            ],
+            [
+                'data' => 'month.month',
+                'name' => 'month.month',
+                'visible' => false
+            ],
+            [
+                'data' => 'year',
+                'name' => 'year',
+                'visible' => false
             ],
             [
                 'data' => 'actual',
