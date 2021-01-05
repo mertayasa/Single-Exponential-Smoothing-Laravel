@@ -49,6 +49,10 @@ class ActualDataDataTable extends DataTable{
                 'visible' => false
             ],
             [
+                'data' => 'month_id',
+                'visible' => false
+            ],
+            [
                 'data' => 'id',
                 'name' => 'actual_data.id',
                 'visible' => false

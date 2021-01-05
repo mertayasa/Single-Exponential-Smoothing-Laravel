@@ -134,6 +134,8 @@ class ForecastObserver{
                     array('alpha' => 0.8, 'mape' => (array_sum($mape_08) / count($mape_08)) * 100)
                 );
 
+                Log::info($all_mape);
+
                 // Find minimum value of mape
                 $min = min($all_mape[0]['mape'], $all_mape[1]['mape'], $all_mape[2]['mape']);
 
