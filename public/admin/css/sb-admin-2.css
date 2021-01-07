@@ -1517,14 +1517,15 @@ pre code {
 .table {
   width: 100%;
   margin-bottom: 1rem;
-  color: #858796;
+  /* color: #858796; */
+  color: rgb(43, 43, 43);
 }
 
 .table th,
 .table td {
   padding: 0.75rem;
   vertical-align: top;
-  border-top: 1px solid #e3e6f0;
+  /* border-top: 1px solid #e3e6f0; */
 }
 
 .table thead th {

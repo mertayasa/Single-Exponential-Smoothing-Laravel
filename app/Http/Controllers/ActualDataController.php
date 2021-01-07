@@ -29,7 +29,7 @@ class ActualDataController extends Controller
 
     public function index(ActualDataDataTable $actualDataDataTable, Request $request){
         $product = $this->productRepository->getAllData()->pluck('product_name', 'id');
-        $product->prepend('Pilih Produk', '');
+        $product->prepend('Pilih Menu', '');
         $actualData = $this->actualDataRepository->getAllData();
         // dd($actualData);
         return $actualDataDataTable->render('actual_data.index', compact('product'));

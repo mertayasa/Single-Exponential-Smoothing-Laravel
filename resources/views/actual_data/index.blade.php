@@ -70,6 +70,12 @@
             </div>
         </div>
     </div>
+
+    {{-- <style>
+        .dataTables_filter>label>.form-control{
+            border: 1px solid red !important;
+        }
+    </style> --}}
 @endsection
 
 @push('scripts')
@@ -235,7 +241,7 @@
     }
 
 </script>
-{!! $dataTable->scripts() !!}
+    {!! $dataTable->scripts() !!}
 <script>
     filterProduct.on('change', function(){
         let dtable = $('#actualdatadatatabletable').DataTable()

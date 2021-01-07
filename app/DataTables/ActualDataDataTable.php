@@ -59,7 +59,7 @@ class ActualDataDataTable extends DataTable{
             ],
             [
                 'data' => 'product.product_name',
-                'title' => 'Nama Product'
+                'title' => 'Nama Menu'
             ],
             [
                 'data' => 'month_detail',
