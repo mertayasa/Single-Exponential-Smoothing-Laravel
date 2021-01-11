@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\models\Forecast;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Product;
+use App\Models\Menu;
 use App\Models\Month;
 use Carbon\Carbon;
 use MonthSeeder;
@@ -15,17 +15,17 @@ class ActualData extends Model
 
     public $fillable = [
         'actual',
-        'product_id',
+        'menu_id',
         'month_id',
         'year'
     ];
 
     public $with = [
-        'product', 'month'
+        'menu', 'month'
     ];
 
-    public function product(){
-        return $this->belongsTo(Product::class)->withTrashed();
+    public function menu(){
+        return $this->belongsTo(Menu::class)->withTrashed();
     }
 
     public function month(){

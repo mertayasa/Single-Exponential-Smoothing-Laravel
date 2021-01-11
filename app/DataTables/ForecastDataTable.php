@@ -14,14 +14,14 @@ class ForecastDataTable extends DataTable{
                 return $forecast['month']['month'].' '.$forecast['year'];
             })
             ->addColumn('action', function($forecast){
-                $product_id = $forecast['product_id'];
-                return view('forecast.datatables_action', compact('product_id'));
+                $menu_id = $forecast['menu_id'];
+                return view('forecast.datatables_action', compact('menu_id'));
             });
             // ->addColumn('action', 'forecast.datatables_action');
     }
 
     public function query(Forecast $model){
-        $all_data = Forecast::orderBy('id', 'DESC')->get()->groupBy('product_id')->toArray();
+        $all_data = Forecast::orderBy('id', 'DESC')->get()->groupBy('menu_id')->toArray();
 
         $temp = [];
         foreach($all_data as $data){
@@ -48,8 +48,8 @@ class ForecastDataTable extends DataTable{
                 'visible' => false
             ],
             [
-                'data' => 'product.product_name',
-                'title' => 'Nama Product',
+                'data' => 'menu.menu_name',
+                'title' => 'Nama Menu',
                 'orderable' => false,
             ],
             [

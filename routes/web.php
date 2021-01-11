@@ -26,12 +26,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('product_category_update/{id}', 'ProductCategoryController@update')->name('product_category.update');
     Route::get('product_category_destroy/{id}', 'ProductCategoryController@destroy')->name('product_category.destroy');
 
-    Route::get('menu', 'ProductController@index')->name('menu.index');
-    Route::get('menu/create', 'ProductController@create')->name('menu.create');
-    Route::post('menu/store', 'ProductController@store')->name('menu.store');
-    Route::get('menu/{id}', 'ProductController@edit')->name('menu.edit');
-    Route::patch('menu_update/{id}', 'ProductController@update')->name('menu.update');
-    Route::get('menu_destroy/{id}', 'ProductController@destroy')->name('menu.destroy');
+    Route::get('menu', 'MenuController@index')->name('menu.index');
+    Route::get('menu/create', 'MenuController@create')->name('menu.create');
+    Route::post('menu/store', 'MenuController@store')->name('menu.store');
+    Route::get('menu/{id}', 'MenuController@edit')->name('menu.edit');
+    Route::patch('menu_update/{id}', 'MenuController@update')->name('menu.update');
+    Route::get('menu_destroy/{id}', 'MenuController@destroy')->name('menu.destroy');
 
     Route::get('forecast', 'ForecastController@index')->name('forecast.index');
     Route::get('forecast/create', 'ForecastController@create')->name('forecast.create');

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSoftDeleteToProductCategoriesTable extends Migration
+class AddMenuIdToActualData extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class AddSoftDeleteToProductCategoriesTable extends Migration
      */
     public function up()
     {
-        // Schema::table('product_categories', function (Blueprint $table) {
-        //     $table->softDeletes();
-        // });
+        Schema::table('actual_data', function (Blueprint $table) {
+            $table->unsignedInteger('menu_id');
+            $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade')->onUpdate('cascade');
+        });
     }
 
     /**
@@ -25,7 +26,7 @@ class AddSoftDeleteToProductCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::table('product_categories', function (Blueprint $table) {
+        Schema::table('actual_datas', function (Blueprint $table) {
             //
         });
     }

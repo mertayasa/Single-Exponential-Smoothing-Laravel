@@ -2,12 +2,13 @@
 
 namespace App\models;
 
+use App\Models\Menu;
 use Illuminate\Database\Eloquent\Model;
 
 class Forecast extends Model
 {
     protected $fillable = [
-        'product_id',
+        'menu_id',
         'month_id',
         'forecast',
         'alpha',
@@ -15,12 +16,12 @@ class Forecast extends Model
     ];
 
     protected $with = [
-        'product',
+        'menu',
         'month'
     ];
 
-    public function product(){
-        return $this->belongsTo(Product::class)->withTrashed();
+    public function menu(){
+        return $this->belongsTo(Menu::class)->withTrashed();
     }
 
     public function month(){

@@ -15,12 +15,12 @@ class CreateForecastsTable extends Migration
     {
         Schema::create('forecasts', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('menu_id');
             $table->integer('month_id');
             $table->double('forecast', 15,2);
-            $table->double('alpha', 2,1);
+            $table->double('alpha', 1,1);
             $table->timestamps();
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('month_id')->references('id')->on('months')->onDelete('cascade')->onUpdate('cascade');
         });
     }

@@ -2,21 +2,21 @@
 
 namespace App\DataTables;
 
-use App\Models\Product;
+use App\Models\Menu;
 use Yajra\DataTables\Services\DataTable;
 
-class ProductDataTable extends DataTable{
+class MenuDataTable extends DataTable{
 
     public function dataTable($query){
         return datatables()
             ->eloquent($query)
-            ->editColumn('selection', function($product){
-                return view('product.datatables_check', compact('product'));
+            ->editColumn('selection', function($menu){
+                return view('menu.datatables_check', compact('menu'));
             })
-            ->addColumn('action', 'product.datatables_action');
+            ->addColumn('action', 'menu.datatables_action');
     }
 
-    public function query(Product $model){
+    public function query(Menu $model){
         return $model->newQuery();
     }
 
@@ -46,7 +46,7 @@ class ProductDataTable extends DataTable{
                 'visible' => false
             ],
             [
-                'data' => 'product_name',
+                'data' => 'menu_name',
                 'title' => 'Nama Menu'
             ],
         ];

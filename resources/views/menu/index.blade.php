@@ -45,8 +45,8 @@
                 <div class="modal-body">
                     <form action="" id="menuFrom">
                         <input type="hidden" name="menu_id" id="menuId">
-                        {!! Form::label('product_name', 'Nama Menu') !!}
-                        <input type="text" class="form-control" name="product_name" id="menuName">
+                        {!! Form::label('menu_name', 'Nama Menu') !!}
+                        <input type="text" class="form-control" name="menu_name" id="menuName">
                         {{-- {!! Form::label('menu_category_id', 'Kategori menu', ['class' => 'mt-4']) !!} --}}
                         {{-- {!! Form::select('menu_category_id', $category, isset($menu) ? $menu->menu_category_id : 0, ['class' => 'form-control', 'id' => 'menuCategory']) !!} --}}
                     </form>

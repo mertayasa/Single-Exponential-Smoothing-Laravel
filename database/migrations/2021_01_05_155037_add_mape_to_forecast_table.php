@@ -14,7 +14,7 @@ class AddMapeToForecastTable extends Migration
     public function up()
     {
         Schema::table('forecasts', function (Blueprint $table) {
-            $table->double('mape', 15,2)->default(0.0);
+            // $table->double('mape', 15,2)->default(0.0);
         });
     }
 

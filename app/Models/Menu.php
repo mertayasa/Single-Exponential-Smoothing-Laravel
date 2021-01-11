@@ -4,14 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\ProductCategory;
 use App\Models\ActualData;
 
-class Product extends Model
+class Menu extends Model
 {
     use SoftDeletes;
     public $fillable = [
-        'product_name',
+        'menu_name',
         // 'product_category_id'
     ];
 

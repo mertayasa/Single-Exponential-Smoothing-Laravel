@@ -21,7 +21,7 @@
             </tr>
             @foreach($export_data as $data)
                 <tr>
-                    <td>{{$data['product']['product_name']}}</td>
+                    <td>{{$data['menu']['menu_name']}}</td>
                     <td>{{$data['month']['month']}}</td>
                     <td>{{$data['forecast']}}</td>
                 </tr>

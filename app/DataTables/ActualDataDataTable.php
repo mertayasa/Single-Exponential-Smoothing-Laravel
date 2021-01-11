@@ -16,7 +16,7 @@ class ActualDataDataTable extends DataTable{
             ->editColumn('selection', function($actual_data){
                 return view('actual_data.datatables_check', compact('actual_data'));
             })
-            ->addColumn('action', 'product.datatables_action');
+            ->addColumn('action', 'actual_data.datatables_action');
     }
 
     public function query(ActualData $model){
@@ -45,7 +45,7 @@ class ActualDataDataTable extends DataTable{
                 'searchable' => false
             ],
             [
-                'data' => 'product.id',
+                'data' => 'menu.id',
                 'visible' => false
             ],
             [
@@ -58,7 +58,7 @@ class ActualDataDataTable extends DataTable{
                 'visible' => false
             ],
             [
-                'data' => 'product.product_name',
+                'data' => 'menu.menu_name',
                 'title' => 'Nama Menu'
             ],
             [

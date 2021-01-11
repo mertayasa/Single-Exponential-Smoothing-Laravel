@@ -13,11 +13,11 @@ class CreateUserProfilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_profiles', function (Blueprint $table) {
-            $table->increments('id');
-            $table->text('profile_json');
-            $table->timestamps();
-        });
+        // Schema::create('user_profiles', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->text('profile_json');
+        //     $table->timestamps();
+        // });
     }
 
     /**

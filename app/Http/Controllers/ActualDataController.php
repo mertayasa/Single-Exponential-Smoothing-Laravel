@@ -7,7 +7,7 @@ use App\Exports\OveralForecastExport;
 use App\models\Forecast;
 use App\Repositories\ActualDataRepository;
 use App\Repositories\MonthRepository;
-use App\Repositories\ProductRepository;
+use App\Repositories\MenuRepository;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -17,22 +17,22 @@ use Maatwebsite\Excel\Facades\Excel;
 class ActualDataController extends Controller
 {
 
-    protected $productRepository;
+    protected $menuRepository;
     protected $actualDataRepository;
     protected $monthRepository;
 
-    public function __construct(ProductRepository $productRepo, ActualDataRepository $actualDataRepo, MonthRepository $monthRepo){
-        $this->productRepository = $productRepo;
+    public function __construct(MenuRepository $menuRepo, ActualDataRepository $actualDataRepo, MonthRepository $monthRepo){
+        $this->menuRepository = $menuRepo;
         $this->actualDataRepository = $actualDataRepo;
         $this->monthRepository = $monthRepo;
     }
 
     public function index(ActualDataDataTable $actualDataDataTable, Request $request){
-        $product = $this->productRepository->getAllData()->pluck('product_name', 'id');
-        $product->prepend('Pilih Menu', '');
+        $menu = $this->menuRepository->getAllData()->pluck('menu_name', 'id');
+        $menu->prepend('Pilih Menu', '');
         $actualData = $this->actualDataRepository->getAllData();
         // dd($actualData);
-        return $actualDataDataTable->render('actual_data.index', compact('product'));
+        return $actualDataDataTable->render('actual_data.index', compact('menu'));
     }
 
     public function store(Request $request){
@@ -105,10 +105,10 @@ class ActualDataController extends Controller
         }
     }
 
-    public function getMonthLeft($product_id){
+    public function getMonthLeft($menu_id){
         $all_month = $this->monthRepository->getAllData()->pluck('id')->toArray();
         $all_months = $this->monthRepository->getAllData()->pluck('id', 'month')->toArray();
-        $group_year_in_actual_db = $this->actualDataRepository->findByProductId($product_id)->orderby('month_id', 'ASC')->get()->groupby('year')->toArray();
+        $group_year_in_actual_db = $this->actualDataRepository->findByMenuId($menu_id)->orderby('month_id', 'ASC')->get()->groupby('year')->toArray();
 
         $final_month = [];
         if(count($group_year_in_actual_db) == 0){

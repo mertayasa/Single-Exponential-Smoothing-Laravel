@@ -29,7 +29,7 @@
                                     <span>Filter</span>
                                 </div>
                                 <div class="col-9">
-                                    {!! Form::select('product_id_filter', $product, null, ['class' => 'form-control', 'id' => 'filterProduct']) !!}
+                                    {!! Form::select('menu_id_filter', $menu, null, ['class' => 'form-control', 'id' => 'filtermenu']) !!}
                                 </div>
                             </div>
                         </div>
@@ -51,10 +51,10 @@
                 </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" id="productFrom">
+                    <form action="" id="menuFrom">
                         {!! Form::hidden('actual_id', null, ['id' => 'actualDataId']) !!}
-                        {!! Form::label('product_id', 'Produk') !!}
-                        {!! Form::select('product_id', $product, isset($actual_data) ? $actual_data->product_id : 0, ['class' => 'form-control', 'id' => 'productId', 'onChange' => 'triggerMonth(this.value)']) !!}
+                        {!! Form::label('menu_id', 'Produk') !!}
+                        {!! Form::select('menu_id', $menu, isset($actual_data) ? $actual_data->menu_id : 0, ['class' => 'form-control', 'id' => 'menuId', 'onChange' => 'triggerMonth(this.value)']) !!}
                         {!! Form::label('actual_data', 'Data Aktual', ['class' => 'mt-4']) !!}
                         {!! Form::number('actual', null, ['class' => 'form-control', 'id' => 'actualData', 'disabled', 'onKeyUp="validate(this, event)"']) !!}
                         {!! Form::hidden('year', null, ['class' => 'form-control', 'id' => 'yearData']) !!}
@@ -85,12 +85,12 @@
 @include('layouts.admin_js')
 <script>
 
-    let filterProduct = $('#filterProduct');
+    let filtermenu = $('#filtermenu');
     let actualIdField = $('#actualDataId');
-    let productIdField = $('#productId');
+    let menuIdField = $('#menuId');
     let yearDataField = $('#yearData');
-    let productActualDataField = $('#actualData');
-    let categorySelect = $('#productCategory');
+    let menuActualDataField = $('#actualData');
+    let categorySelect = $('#menuCategory');
     let monthSelect = $('#monthList');
     let buttonSubmit = $('.btn-submit');
     let closeButton = $('.close');
@@ -123,12 +123,12 @@
         let xcsrf = "{{csrf_token()}}";
 
         if(value == 0){
-            productActualDataField.prop('disabled', true)
+            menuActualDataField.prop('disabled', true)
             monthSelect.prop('disabled', true)
             monthSelect.html(`<option value="0">Pilih Bulan</option>`);
         }else{
             monthSelect.prop('disabled', false)
-            productActualDataField.prop('disabled', false)
+            menuActualDataField.prop('disabled', false)
             $.ajax({
                 url : "{{url('actual-data-month')}}" + '/' + value,
                 method : 'get',
@@ -162,7 +162,7 @@
 
     // Submit Form
     function submitActualData(url){
-        let formData = $('#productFrom').serializeArray();
+        let formData = $('#menuFrom').serializeArray();
         let csrf_token = "{{ csrf_token() }}";
         let method = '';
         let urlMethod = '';
@@ -205,8 +205,8 @@
 
     // Function to clear form
     function clearForm(){
-        $('#productFrom')[0].reset();
-        productActualDataField.prop('disabled', true)
+        $('#menuFrom')[0].reset();
+        menuActualDataField.prop('disabled', true)
         monthSelect.prop('disabled', true)
         monthSelect.html(`<option>Pilih Bulan</option>`)
         yearDataField.val('')
@@ -227,11 +227,11 @@
             success: function(data){
                 console.log(data)
                 actualIdField.val(data.id)
-                productIdField.html('');
-                productIdField.prop('disabled', true);
-                productIdField.append(`<option value="` + data.product.id + `"> ` + data.product.product_name + ` </option>`)
-                productActualDataField.prop('disabled', false)
-                productActualDataField.val(data.actual)
+                menuIdField.html('');
+                menuIdField.prop('disabled', true);
+                menuIdField.append(`<option value="` + data.menu.id + `"> ` + data.menu.menu_name + ` </option>`)
+                menuActualDataField.prop('disabled', false)
+                menuActualDataField.val(data.actual)
                 yearDataField.val(data.year)
                 monthSelect.html('');
                 monthSelect.append(`<option value="` + data.month.id + `"> ` + data.month.month + ` </option>`)
@@ -243,7 +243,7 @@
 </script>
     {!! $dataTable->scripts() !!}
 <script>
-    filterProduct.on('change', function(){
+    filtermenu.on('change', function(){
         let dtable = $('#actualdatadatatabletable').DataTable()
         dtable.column(1).search($(this).val()).draw();
     })
