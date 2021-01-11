@@ -60,10 +60,10 @@ class ForecastDetailDataTable extends DataTable{
                 'data' => 'forecast',
                 'title' => 'Peramalan'
             ],
-            [
-                'data' => 'mape',
-                'title' => 'Error'
-            ],
+            // [
+            //     'data' => 'mape',
+            //     'title' => 'Error'
+            // ],
             // [
             //     'data' => 'year',
             //     'title' => 'Tahun'
