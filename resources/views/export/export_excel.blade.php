@@ -10,8 +10,11 @@
     @foreach($export_data as $data)
         <tr>
             <td>{{$data['menu']['menu_name']}}</td>
+            <td>{{$data['month']['month']}}</td>
+            <td>{{$data['actual']}}</td>
+            {{-- <td>{{$data['menu']['menu_name']}}</td>
             <td>{{$data['month']['month'].' '.$data['year']}}</td>
-            <td>{{$data['forecast']}}</td>
+            <td>{{$data['forecast']}}</td> --}}
         </tr>
     @endforeach
 </table>

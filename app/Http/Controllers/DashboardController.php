@@ -17,13 +17,13 @@ class DashboardController extends Controller{
         $actual_forecast = $this->forecastRepository->groupData();
 
         $forecast = [];
-        $product = [];
+        $menu = [];
         foreach($actual_forecast as $act_data){
             array_push($forecast, $act_data['forecast']);
-            array_push($product, $act_data['product']['product_name']);
+            array_push($menu, $act_data['menu']['menu_name']);
         }
         
-        $forecasts = array('forecast' => json_encode($forecast), 'product' => json_encode($product));
+        $forecasts = array('forecast' => json_encode($forecast), 'menu' => json_encode($menu));
 
         return view('dashboard.index', compact('forecasts'));
     }

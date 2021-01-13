@@ -163,7 +163,7 @@
           <script>
             let canvasForecast = $('#forecastChart');
             let forecasts = <?php echo $forecasts['forecast'] ?>;
-            let labels = <?php echo $forecasts['product'] ?>;
+            let labels = <?php echo $forecasts['menu'] ?>;
 
             
             let barChart = new Chart(canvasForecast, {

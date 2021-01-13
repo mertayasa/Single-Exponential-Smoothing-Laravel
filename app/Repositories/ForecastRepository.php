@@ -12,7 +12,7 @@ class ForecastRepository{
     }
 
     public function groupData(){
-        $all_data = $this->forecast->orderBy('id', 'DESC')->get()->groupBy('product_id')->toArray();
+        $all_data = $this->forecast->orderBy('id', 'DESC')->get()->groupBy('menu_id')->toArray();
 
         $temp = [];
         foreach($all_data as $data){
@@ -22,8 +22,8 @@ class ForecastRepository{
         return $temp;
     }
 
-    public function findByProductId($product_id){
-        $forecast = $this->forecast->where('product_id', $product_id)->get();
+    public function findByMenuId($menu_id){
+        $forecast = $this->forecast->where('menu_id', $menu_id)->get();
 
         return $forecast;
     }

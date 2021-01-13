@@ -20,7 +20,7 @@ class ForecastDetailDataTable extends DataTable{
     }
 
     public function query(Forecast $model){
-        $forecast = Forecast::where('product_id', $this->product_id)->get()->toArray();
+        $forecast = Forecast::where('menu_id', $this->menu_id)->get()->toArray();
         return collect($forecast);
         return $model->newQuery();
     }
@@ -41,8 +41,8 @@ class ForecastDetailDataTable extends DataTable{
                 'visible' => false
             ],
             [
-                'data' => 'product.product_name',
-                'title' => 'Nama Product',
+                'data' => 'menu.menu_name',
+                'title' => 'Nama Menu',
                 'orderable' => false,
                 'searchable' => false,
             ],

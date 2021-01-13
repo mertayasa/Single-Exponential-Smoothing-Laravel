@@ -84,7 +84,7 @@ class ForecastObserver{
                         }
                     }
                 }
-                Log::info($last);
+                // Log::info($last);
 
                 // Group forecast based on alpha used
                 foreach($forecast_temp as $fore_temp){
@@ -102,7 +102,7 @@ class ForecastObserver{
                 $mape_08 = [];
 
                 $all_forecast = array('02' => $forecast_02, '05' => $forecast_05, '08' => $forecast_08);
-                Log::info($all_forecast);
+                // Log::info($all_forecast);
 
                 // Count |At - Ft| / At
                 foreach($all_forecast as $all_fore){
@@ -134,7 +134,7 @@ class ForecastObserver{
                     array('alpha' => 0.8, 'mape' => (array_sum($mape_08) / count($mape_08)) * 100)
                 );
 
-                Log::info($all_mape);
+                Log::info(array('menu' => $actuals[0]['menu']['menu_name'], 'mape' => $all_mape));
 
                 // Find minimum value of mape
                 $min = min($all_mape[0]['mape'], $all_mape[1]['mape'], $all_mape[2]['mape']);

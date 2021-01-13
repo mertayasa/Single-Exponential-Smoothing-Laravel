@@ -7,9 +7,9 @@
 @endpush
 @section('content')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Detail Peramalan {{$product_name}}</h1>
+        <h1 class="h3 mb-0 text-gray-800">Detail Peramalan {{$menu_name}}</h1>
     </div>
-    <p><strong><a href="{{route('dashboard')}}" class='text-decoration-none text-gray-900'>Dashboard</a></strong> / Detail Peramalan / {{$product_name}} </p>
+    <p><strong><a href="{{route('dashboard')}}" class='text-decoration-none text-gray-900'>Dashboard</a></strong> / Detail Peramalan / {{$menu_name}} </p>
     <!-- Area Table -->
     {{-- @include('layouts.flash') --}}
     <div class="col-12 p-0">
@@ -19,8 +19,8 @@
                 <div class="col-12 p-0 mb-3">
                     <div class="row">
                         <div class="col-6 d-flex">
-                            <a href="{{route('forecast.export_histori', ['excel', $product_id])}}" class="btn btn-primary mr-2">Export Excel</a>
-                            <a href="{{route('forecast.export_histori', ['pdf', $product_id])}}" class="btn btn-success">Export Pdf</a>
+                            <a href="{{route('forecast.export_histori', ['excel', $menu_id])}}" class="btn btn-primary mr-2">Export Excel</a>
+                            <a href="{{route('forecast.export_histori', ['pdf', $menu_id])}}" class="btn btn-success">Export Pdf</a>
                         </div>
                     </div>
                 </div>

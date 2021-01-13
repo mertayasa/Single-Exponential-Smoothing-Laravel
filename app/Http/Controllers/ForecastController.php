@@ -34,12 +34,12 @@ class ForecastController extends Controller{
         //
     }
 
-    public function show($product_id, ForecastDetailDataTable $forecastDetailDataTable){
-        $forecast = $this->forecastRepository->findByProductId($product_id)->toArray();
+    public function show($menu_id, ForecastDetailDataTable $forecastDetailDataTable){
+        $forecast = $this->forecastRepository->findByMenuId($menu_id)->toArray();
         // dd($forecast);
         if($forecast){
-            $product_name = $forecast[0]['product']['product_name'];
-            return $forecastDetailDataTable->with('product_id', $product_id)->render('forecast.detail', compact('product_name', 'product_id'));
+            $menu_name = $forecast[0]['menu']['menu_name'];
+            return $forecastDetailDataTable->with('menu_id', $menu_id)->render('forecast.detail', compact('menu_name', 'menu_id'));
         }else{
             abort(404);
         }
@@ -58,7 +58,7 @@ class ForecastController extends Controller{
     }
 
     public function exportOveral($method){
-        $all_data = Forecast::orderBy('id', 'DESC')->get()->groupBy('product_id')->toArray();
+        $all_data = Forecast::orderBy('id', 'DESC')->get()->groupBy('menu_id')->toArray();
         
         $overal_forecast = [];
         foreach($all_data as $data){
@@ -76,8 +76,8 @@ class ForecastController extends Controller{
         }
     }
 
-    public function exportHistory($method, $product_id){
-        $overal_forecast = Forecast::where('product_id', $product_id)->get()->toArray();
+    public function exportHistory($method, $menu_id){
+        $overal_forecast = Forecast::where('menu_id', $menu_id)->get()->toArray();
         $title = 'Riwayat Peramalan';
 
         // dd($overal_forecast);
