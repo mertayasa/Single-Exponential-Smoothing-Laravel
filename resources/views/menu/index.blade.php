@@ -7,9 +7,9 @@
 @endpush
 @section('content')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Management Menu</h1>
+        <h1 class="h3 mb-0 text-gray-800">Manajemen Menu</h1>
     </div>
-    <p><strong><a href="{{route('dashboard')}}" class='text-decoration-none text-gray-900'>Dashboard</a></strong> / Management Menu</p>
+    <p><strong><a href="{{route('dashboard')}}" class='text-decoration-none text-gray-900'>Dashboard</a></strong> / Manajemen Menu</p>
     <!-- Area Table -->
     {{-- @include('layouts.flash') --}}
     <div class="col-12 p-0">
@@ -53,7 +53,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-warning btn-submit">Save</button>
-                    {{-- <button class="btn btn-warning btn-submit" onclick="submitSubdivisionGroup()">Save</button> --}}
+                    {{-- <button class="btn btn-warning btn-submit" onclick="submitForm()">Save</button> --}}
                 </div>
             </div>
         </div>
@@ -83,17 +83,27 @@
     let menuNameField = $('#menuName');
     let categorySelect = $('#menuCategory');
     let buttonSubmit = $('.btn-submit');
+    let closeButton = $('.close');
+    let modalHeader = $('#createCategoryModalLabel');
+
+    closeButton.on('click', function(){
+        clearForm();
+    })
 
     // Show create modal and fill it with data
     function showCreateModal(){
-        buttonSubmit.attr('onclick', "submitSubdivisionGroup('create')")
+        buttonSubmit.attr('onclick', "submitForm('create')")
+        buttonSubmit.text('Save');
+        modalHeader.text('Tambah Data Menu');
     }
 
     function showEditModal(){
-        buttonSubmit.attr('onclick', "submitSubdivisionGroup('create')")
+        buttonSubmit.attr('onclick', "submitForm('update')")
+        buttonSubmit.text('Update');
+        modalHeader.text('Edit Data Menu');
     }
 
-    function submitSubdivisionGroup(url){
+    function submitForm(url){
         let formData = $('#menuFrom').serializeArray();
         let csrf_token = "{{ csrf_token() }}";
         let method = '';
@@ -129,16 +139,21 @@
                         })
                     }
                 let table = $('#'+tableId).DataTable()
+                clearForm()
                 table.draw()
             }
         })
     }
 
-    function updateCategory(id){
+    function clearForm(){
+        $('#menuFrom')[0].reset();
+    }
+
+    function updateMenu(id){
         $('.modal-create').modal('show');
         $('.btn-back-properties').hide();
-        buttonSubmit.attr('onclick', "submitSubdivisionGroup('update')")
         let csrf_token = "{{csrf_token()}}"
+        showEditModal()
 
         $.ajax({
             url : "{{url('menu')}}" + '/' + id,
@@ -149,7 +164,6 @@
                 console.log(data)
                 menuIdField.val(data.id);
                 menuNameField.val(data.menu_name);
-                categorySelect.val(data.menu_category_id)
             }
 
         })

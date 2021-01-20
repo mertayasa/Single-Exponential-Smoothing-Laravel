@@ -77,7 +77,7 @@
                             if(data[0] == 1){
                                 $('#check_all').iCheck('uncheck')
                                 Swal.fire(
-                                    '{{trans("alert.alert_success")}}',
+                                    'Success',
                                     data[1],
                                     'success'
                             )
@@ -119,7 +119,7 @@
                         if(data[0] == 1){
                         $('#check_all').iCheck('uncheck')
                         Swal.fire(
-                            '{{trans("alert.alert_success")}}',
+                            'Success',
                             data[1],
                             'success'
                         )}else{

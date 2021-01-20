@@ -28,7 +28,7 @@
 <li class="nav-item {{Request::is('actual-data*') ? 'active' : ''}}">
 <a class="nav-link" href="{{route('actual_data.index')}}">
     <i class="fas fas fa-layer-group"></i>
-    <span>Data Aktual</span></a>
+    <span>Aktual Data</span></a>
 </li>
 
 <hr class="sidebar-divider">

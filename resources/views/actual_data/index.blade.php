@@ -7,9 +7,9 @@
 @endpush
 @section('content')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Management Data Aktual</h1>
+        <h1 class="h3 mb-0 text-gray-800">Manajemen Aktual Data</h1>
     </div>
-    <p><strong><a href="{{route('dashboard')}}" class='text-decoration-none text-gray-900'>Dashboard</a></strong> / Management Data Aktual</p>
+    <p><strong><a href="{{route('dashboard')}}" class='text-decoration-none text-gray-900'>Dashboard</a></strong> / Manajemen Aktual Data</p>
     <!-- Area Table -->
     {{-- @include('layouts.flash') --}}
     <div class="col-12 p-0">
@@ -94,6 +94,7 @@
     let monthSelect = $('#monthList');
     let buttonSubmit = $('.btn-submit');
     let closeButton = $('.close');
+    let modalHeader = $('#actualDataModalLabel');
     let timeSeriesData = [];
 
     // Delete Multiple Data
@@ -111,6 +112,14 @@
     // Show create modal and fill it with data
     function showCreateModal(){
         buttonSubmit.attr('onclick', "submitActualData('create')")
+        buttonSubmit.text('Save');
+        modalHeader.text('Tambah Aktual Data');
+    }
+
+    function showEditModal(){
+        buttonSubmit.attr('onclick', "submitActualData('update')")
+        buttonSubmit.text('Update');
+        modalHeader.text('Update Aktual Data');
     }
 
     // Clear Form when button close modal clicked
@@ -216,7 +225,7 @@
     function updateCategory(id){
         $('.modal-create').modal('show');
         $('.btn-back-properties').hide();
-        buttonSubmit.attr('onclick', "submitActualData('update')")
+        showEditModal()
         let csrf_token = "{{csrf_token()}}"
 
         $.ajax({
