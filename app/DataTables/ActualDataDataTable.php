@@ -59,12 +59,14 @@ class ActualDataDataTable extends DataTable{
             ],
             [
                 'data' => 'menu.menu_name',
-                'title' => 'Nama Menu'
+                'title' => 'Nama Menu',
+                'orderable' => false
             ],
             [
                 'data' => 'month_detail',
-                'name' => 'month_detail',
+                'name' => 'month.month',
                 'title' => 'Bulan',
+                'orderable' => false,
                 'searchable' => false
             ],
             [

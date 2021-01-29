@@ -254,7 +254,11 @@
 <script>
     filtermenu.on('change', function(){
         let dtable = $('#actualdatadatatabletable').DataTable()
-        dtable.column(1).search($(this).val()).draw();
+        if(this.value){
+            dtable.column(1).search('^' + this.value + '$', true, false).draw();
+        }else{
+            dtable.column(1).search(this.value).draw();
+        }
     })
 </script>
 @endpush
