@@ -51,6 +51,10 @@
                 </button>
                 </div>
                 <div class="modal-body">
+                    {{-- @php
+                        $test = json_encode($menu->toArray());
+                        dump($test);
+                    @endphp --}}
                     <form action="" id="menuFrom">
                         {!! Form::hidden('actual_id', null, ['id' => 'actualDataId']) !!}
                         {!! Form::label('menu_id', 'Produk') !!}
@@ -111,6 +115,27 @@
 
     // Show create modal and fill it with data
     function showCreateModal(){
+        $.ajax({
+            url: "{{route('menu.get_menu')}}",
+            method: 'get',
+            dataType: 'json',
+            success: function(data){
+                console.log(data)
+                menuIdField.html('');
+                menuIdField.prop('disabled', false)
+                menuActualDataField.prop('disabled', false)
+                menuActualDataField.html('')
+                menuActualDataField.append(`
+                    <select name="month_id" id="monthList" class="form-control" disabled="" onchange="changeYearValue()">
+                        <option value="0">Pilih Bulan</option>
+                    </select>
+                `)
+                menuIdField.append(`<option value=""> Pilih Menu </option>`);
+                for (const [key, value] of Object.entries(data)) {
+                    menuIdField.append(`<option value="` + key + `">` + value + `</option>`)
+                }
+            }
+        })
         buttonSubmit.attr('onclick', "submitActualData('create')")
         buttonSubmit.text('Save');
         modalHeader.text('Tambah Aktual Data');

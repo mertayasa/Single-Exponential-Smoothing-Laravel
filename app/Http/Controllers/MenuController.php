@@ -22,6 +22,10 @@ class MenuController extends Controller
         return $menuDataTable->render('menu.index');
     }
 
+    public function getMenu(){
+        return $this->menuRepository->getAllData()->pluck('menu_name', 'id');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

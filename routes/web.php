@@ -27,6 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('product_category_destroy/{id}', 'ProductCategoryController@destroy')->name('product_category.destroy');
 
     Route::get('menu', 'MenuController@index')->name('menu.index');
+    Route::get('menu/get-menu', 'MenuController@getMenu')->name('menu.get_menu');
     Route::get('menu/create', 'MenuController@create')->name('menu.create');
     Route::post('menu/store', 'MenuController@store')->name('menu.store');
     Route::get('menu/{id}', 'MenuController@edit')->name('menu.edit');
