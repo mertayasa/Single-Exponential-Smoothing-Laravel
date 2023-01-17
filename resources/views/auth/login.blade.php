@@ -46,7 +46,7 @@
 @endpush
 <div class="form-card">
     <div class="actual-form bg-white px-4 py-5 rounded">
-        <h2 class="text-center text-success mb-4">Tempo Dulu Kopi</h2>
+        <h2 class="text-center text-success mb-4">Laravel Single Exponential Smoothing</h2>
         <form id="loginForm" method="POST" action="{{ route('login') }}">
             @csrf
             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="ID">

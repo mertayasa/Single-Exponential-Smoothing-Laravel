@@ -16,7 +16,7 @@ class CreateForecastsTable extends Migration
         Schema::create('forecasts', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('menu_id');
-            $table->integer('month_id');
+            $table->unsignedInteger('month_id');
             $table->double('forecast', 15,2);
             $table->double('alpha', 1,1);
             $table->timestamps();
